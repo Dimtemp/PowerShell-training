@@ -3,21 +3,28 @@
 ## Task 1: PowerShell version
 1. Open PowerShell.
 1. Run this command: ```$host```
-1. This command displays information that represents the current host program. In this case PowerShell.exe.
+1. This command displays information that represents the current host program. In this case PowerShell.exe. Notice the **Version**.
 1. Run this command: ```Get-Host```
 1. This is another way of display the previous information.
 1. Run this command: ```$PSVersionTable```
-1. This command displays detailed version information about PowerShell and other components you're using at this moment.
+1. This command displays detailed version information about PowerShell and other components you're using at this moment. Notice the **PSVersion**.
 
 
 ## Task 2: Get-Command
 1. Run this command: ```Get-Command```
 1. This lists all available PowerShell commands on this system.
 1. Run this command: ```Get-Command *process*```
-1. 
+1. This lists all available PowerShell commands on this system that contain the word **process**.
+1. Run this command: ```Get-Command -Verb Stop```
+1. This lists all available PowerShell commands on this system that have a verb of **Stop**, for example Stop-Process and Stop-Service.
+1. Run this command: ```Get-Verb```
+1. This lists all recommended verbs for PowerShell. In other words: all commands should start with one of these verbs.
+
 
 ## Task 3: Get-Help
-1. Run this command: ```Get-Command```
+1. Run this command: ```Get-Help```
+1. 
+
 
 ## Task 4: Aliases
 1. Run this command: ```Get-Alias```
