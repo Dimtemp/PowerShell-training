@@ -19,11 +19,16 @@
 1. This lists all available PowerShell commands on this system that have a verb of **Stop**, for example Stop-Process and Stop-Service.
 1. Run this command: ```Get-Verb```
 1. This lists all recommended verbs for PowerShell. In other words: all commands should start with one of these verbs.
+1. Run this command: ```Get-Command -Noun Process```
+1. This lists all commands in PowerShell that have a process noun. In other words: all commands end with **Process**.
 
 
 ## Task 3: Get-Help
 1. Run this command: ```Get-Help```
-1. 
+1. This display a list of all help topics
+1. Get-Help Get-Process
+1. Get-Help Get-Process -ShowWindow
+1. Show-Command Get-Process
 
 
 ## Task 4: Aliases
