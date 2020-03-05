@@ -12,7 +12,7 @@
 1. Stop-Job -Id 13
 
 ## FAN-OUT
-1. # Get-Command -parameter AsJob
+1. Get-Command -parameter AsJob
 2. Check procmon op DC1
 3. Invoke-Command { gwmi win32_bios } -comp lon-dc1, lon-cl1 -AsJob
 4. Start-Job { gps } # let op jobnummering
@@ -24,10 +24,9 @@
 1. Get-Job | Remove-Job
 1. $trigger = New-JobTrigger –Once –At (Get-Date).AddMinutes(2) # of -AtLogon
 1. Register-ScheduledJob -Trigger $trigger { Get-Process | Export-CSV c:\p.csv } -Name MyJob
-1. # optioneel: -ScheduledJobOption $option
-1. # $option = New-ScheduledJobOption -WakeToRun -RunElevated
-1. # optioneel: -MaxResultCount 5
-
+1. optioneel: -ScheduledJobOption $option
+1. $option = New-ScheduledJobOption -WakeToRun -RunElevated
+1. optioneel: -MaxResultCount 5
 1. Get-Job # empty
 1. Get-ScheduledJob | Select –Expand JobTriggers # notice the Time
 1. Get-ScheduledJob # wait until after the time that was displayed in the previous step.
