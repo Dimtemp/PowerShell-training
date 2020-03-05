@@ -1,4 +1,5 @@
-# Working with files
+# Filing all these files
+
 ### Note: it is required that you have learned how to work with Select-Object.
 
 
@@ -14,12 +15,12 @@
 1. Get-Content procs.txt | Sort-Object Handles
 
 
-## Task 2: CSV (comma seperated values) files
+## Task 2: Comma Seperated Values (CSV) files
 1. Get-Process w* | Export-CSV procs.csv
 1. Import-CSV procs.csv
 
 
-## Task 3: XML (Extensible Markup Language) files
+## Task 3: Extensible Markup Language (XML) files
 1. This command might take some time if you're not using a recent PowerShell version.
 1. Get-Process w* | Export-CliXML procs.xml
 1. Import the process listing to verify it's read correctly. Unlike the CSV file, this list presents a nice table.
@@ -47,4 +48,19 @@
 1. Note: $procsA is still populated with the first processlisting. There's no need to perform another export.
 
 
+## Task 5: HTML files
+1. To display a list of running processes, that shows only the number of handles, Id and process name
+1. Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName
+1. To convert the process list to an HTML page, run:
+1. Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName | ConvertTo-HTML
+1. To save the HTML page in a file, run:
+1. Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName | ConvertTo-HTML | Out-File Report.html
+1. To view the HTML file, run:
+1. Invoke-Item Report.html
+1. To create another HTML file, run:
+1. Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName | ConvertTo-HTML –PreContent 'Biggest Processes by handle count' –PostContent (Get-Date) | Out-File Report.html
+1. To view the HTML file, run:
+1. Invoke-Item Report.html
+
+Results: After completing this exercise, you will have converted objects to different forms of data.
 
