@@ -1,9 +1,21 @@
 # Filing all these files
 
-### Note: it is required that you have learned how to work with Select-Object.
+In this exercise we're going to work with different file types. You'll discover how easy it is to write and read from files, and discover that different filetypes have different purposes.
 
+### Note: it is required that you have learned how to work with Select-Object.
+$_ required? Foreach-Object???
 
 ## Task 1: text files
+1. Open PowerShell.
+1. Create a new file which contains three usernames with this command:
+1. ```'Alice', 'Bob', 'Carol' | Out-File userlist.txt```
+1. Please note the special use of punctuation marks. We're creating three users surrounded by quotationmarks, three users are separated by two comma's.
+1. Read the text file with this command: ```Get-Content userlist.txt```
+1. Notice three users are returned on three different lines.
+1. Read the text file and process it with this command:
+1. ```Get-Content userlist.txt | Foreach-Object { Write-Host "This is user $_" }```
+
+## Task 2: 
 1. Get-Process
 1. Get-Process w*
 1. Get-Process w* | Out-File procs.txt
