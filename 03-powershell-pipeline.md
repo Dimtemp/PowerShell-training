@@ -6,7 +6,7 @@
 1. This will display a process listing.
 1. Run this command: ```Get-Process | Measure-Object```
 1. This command measures the number of processes.
-1. Run this command: ```Get-Process w*
+1. Run this command: ```Get-Process w*```
 1. This command displays a list of processes with a name that starts with **w**. Count the number of processes.
 1. Run this command: ```Get-Process w* | Measure-Object```
 1. This command measures the number of processes with a name that starts with **w**. Verify that the number is correct.
@@ -32,10 +32,3 @@
 1. Group the services on status by running this command:
 1. ```Get-Service | Group-Object```
 1. The Count column specifies the number of services with a specific status. The Name column does not refer to the service name, but to the name of the status. Most will be Stopped or Started. The Group column contains all services with a specific status. The curly brackets { } indicate it's a collection of objects.
-
-
-Select-Object
-
-Where-Object
-
-Get-Member
