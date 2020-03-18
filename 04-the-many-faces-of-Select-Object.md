@@ -5,9 +5,7 @@
 1. ```Get-Process w*```
 1. Run the following command to view the previous processes, but only with a few specific properties: Id and Name.
 1. ```Get-Process w* | Select-Object Id, Name```
-
 1. ```Get-Process w* | Select-Object Id, Name```
-
 
 
 ## Task 2: The first will be last
