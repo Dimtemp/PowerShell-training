@@ -33,7 +33,7 @@
 1. The result is sorted on the id column. Please notice the use of the sort alias instead of the Sort-Object cmdlet. Many commands that have a **Object** Noun, an alias exists without the noun. For example, Sort is an alias for Sort-Object, Measure is an alias for Measure-Object.
 
 
-## Task 3: Group-Object
+## Task 3: Grouping
 1. Run this command: ```Get-Command```
 1. This will display a listing of all commands in PowerShell. Notice the header of the table: all command's have a specific **CommandType**.
 1. Run this command: ```Get-Command | Group-Object CommandType```
