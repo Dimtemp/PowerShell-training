@@ -31,7 +31,7 @@
 1. Show-Command Get-Process
 
 
-## Task 4: Aliases
+## Task 4: Inspecting Aliases
 1. Run this command: ```Get-Alias```
 1. This displays a listing of all aliases on the system.
 1. Run this command: ```Get-Alias dir, cls, copy```
@@ -39,6 +39,19 @@
 1. Run this command: ```Get-Alias ls, clear, cp```
 1. This displays aliases for several popular commands that exist in Unix and Linux. Notice that several aliases can exist for single PowerShell command's. For example: the Clear-Host command has at least two aliases: cls and clear.
 1. Run this command: ```Get-Alias gci, gcm, gm, group, sort, select, ft, fl```
-1. This displays aliases for several popular PowerShell commands. Many popular commands that exist natively in PowerShell can also be aliased.
+1. This displays aliases for several popular PowerShell commands. Many popular commands that exist natively in PowerShell can also be aliased. For example: Get-Process has a gps alias.
 
 ### Note: it is a best practice to use as few aliases as possible. This way script readability is increased.
+
+
+## Task 5: Creating Aliases
+1. Run this command: ```New-Alias edit notepad```
+1. You now created an alias for the notepad application.
+1. Run this command: ```edit```
+1. This will start notepad, since that's what the alias is referring to.
+1. Close notepad to return to PowerShell.
+1. Run this command to close PowerShell: ```exit``` 
+1. Now start PowerShell again.
+1. Run this command: ```edit```
+1. You'll receive an errormessage that this term is not recognized. That's because aliases only exist in memory. In a later exercise we'll learn how to create aliases in a PowerShell profile and 'make the stick'.
+
