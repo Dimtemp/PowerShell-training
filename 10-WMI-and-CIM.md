@@ -1,5 +1,7 @@
 # WMI and CIM
 
+Requirements: Get-Member.
+
 # Task 1: Working with WMI
 1. Get-WmiObject win32_bios
 1. Get-WmiObject win32_computersystem
@@ -8,9 +10,21 @@
 1. Get-WmiObject –List –Class *disk*
 1. Get-WmiObject Win32_DiskDrive # ook: Win32_Volume / Win32_SystemPartitions, LogicalDisk: drivetype = 3: fixed disks
 
+# Task: Investigating WMI Objects
+1. Run this command: ```Get-Service```
+1. Notice the default output. It is a table that consists of three columns: Status, Name and DisplayName. An important property of a service is the account with which the service is running. This is not a part of the default output.
+1. Run this command: ```Get-Service | Format-List *```
+1. Notice that an account name is still not a part of the output. 
+1. Try this command: ```Get-Service | Get-Member```
+1. An account name is still not part of the output. We need to find this information somewhere else.
+1. Run this command: ```Get-WmiObject –Class Win32_Service```
+1. Notice the default output is a list that contains several properties: ExitCode, Name, ProcessId, StartMode, State and Status. There's still nog accountname in the output.
+1. Run this command: ```Get-WmiObject –Class Win32_Service | Format-List *```
+
+
 # Task: Filtering WMI Objects
-1. Get-Service
-1. Get-WmiObject –Class Win32_Service
+1. Run this command: ```Get-WmiObject –Class Win32_Service```
+1. output
 1. -Filter "Name LIKE 'S%'"
 1. –Filter "Name='WinRM'" |
 
