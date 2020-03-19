@@ -3,10 +3,14 @@
 #### Note: make sure you know how to work with Select-Object before performing this exercise.
 
 ## Task 1:
-1. mspaint
-1. Get-Help stop-process
-1. look for Accept pipeline input (ByValue) (ByPropertyName)
-1. Get-Help Stop-Process -Parameter *
+1. Open a PowerShell console.
+1. Run this command to start Paint: ```mspaint```
+1. MS Paint opens. Return to the PowerShell console, but leave Paint open.
+1. Run this command: ```Get-Help stop-process -full```
+1. Scroll to the parameters section and find all parameters that accept pipeline input. For example: the Confirm parameter specifies no pipeline input is accepted: ```Accept pipeline input? False```
+1. For all parameters that accept pipeline input, notice whether pipeline input is accepted by property name, or by value.
+1. Processes can be stopped by their process id. Run this command to get the process id of Paint: ```Get-Process mspaint```
+1. Make a note of the process id in the Id column. 
 1. stop-process [-id] <id>
 1. mspaint
 1. stop-process -name mspaint
