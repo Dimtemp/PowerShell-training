@@ -74,4 +74,4 @@
 1. Now start PowerShell again.
 1. Run this command: ```edit```
 1. You'll receive an errormessage that this term is not recognized. That's because aliases only exist in memory. In a later exercise we'll learn how to create aliases in a PowerShell profile and 'make the stick'.
-
+1. Keep the PowerShell console running for the next task.
