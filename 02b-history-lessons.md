@@ -1,4 +1,4 @@
-# PowerShell history
+# history lessons in PowerShell
 A famous saying goes like this: "those who don't know history are destined to repeat it". You don't want to keep typing the same commands over and over again, do you? So here are some history lessons.
 
 ## Task 1: History
