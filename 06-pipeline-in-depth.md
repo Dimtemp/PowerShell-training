@@ -48,7 +48,7 @@ For this exercise you will need at least two computers. We're using a domain con
 1. There are generally four solutions to the problem in the previous task. There is no best solution. That's mostly personal preference. There is however a worst solution. Let's find out.
 
 ### Solution 1: manually editing a file
-1. Get-ADComputer –Filter * | Export-Csv computers.csv
+1. Run this command: ```Get-ADComputer –Filter * | Export-Csv computers.csv```
 1. Now open the file for editing with this command: ```Notepad computers.csv```
 1. Replace DnsHostName with ComuterName is the header of the file.
 1. Save the file and return to the PowerShell console.
@@ -57,13 +57,26 @@ For this exercise you will need at least two computers. We're using a domain con
 1. Since this method involves editing a file by hand, it's not appropriate for running this command unattended, for example when running a nightly job. This would be the worst solution.
 
 ### Solution 2: using Select-Object
-1. ```Get-ADComputer –Filter * | Select @{n='ComputerName';e={$_.Name}} | Test-Connection```
+1. With Select-Object command you can influence the output. In this case, we're going to create a new property with the name ComputerName. That name is accepted by Test-Connection.
+1. Run this command to inspect the output: ```Get-ADComputer –Filter *```
+1. Notice the Name property.
+1. Run this command to create output that displays a ComputerName property. The source of the data is the Name property of the Active Directory output.
+1. ```Get-ADComputer –Filter * | Select-Object @{name='ComputerName';expression={$_.Name}}```
+1. Notice that the only output includes a ComuterName property. This is accepted by the Test-Connection command.
+1. Run this command to pipe the output of Select-Object to Test-Connection:
+1. ```Get-ADComputer –Filter * | Select-Object @{name='ComputerName';expression={$_.Name}} | Test-Connection```
+1. Notice that the command is working.
 
 ### Solution 3: using Foreach-Object
+1. Using the Foreach-Object you can process any output. This command is the most flexible 
 1. ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+1. 
 
-### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen", in my native tongue: Dutch)
+### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen", in my native language: Dutch)
 1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
+1. 
 
-
-
+## Resume
+1. ```Get-ADComputer –Filter * | Select-Object @{name='ComputerName';expression={$_.Name}} | Test-Connection```
+1. ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
