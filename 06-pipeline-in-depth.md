@@ -2,6 +2,8 @@
 
 #### Note: make sure you know how to work with Select-Object before performing this exercise.
 
+#### Note: as with most PowerShell exercises, it's best not to copy-paste the command's, but to actually type them. Use keyboard navigation (arrow up/down, home, end) to speed up entering commands in PowerShell.
+
 #### Note: make sure you are working with a computer that has the Active Directory PowerShell module installed.
 
 ## Task 1: pipeline binding, in depth
@@ -29,8 +31,8 @@
 
 
 ## Task 2: pipline binding, in depth and advanced
-For this exercise you will need at least two computers. We're using a domain controller with the name LON-DC1 and a Windows 10 computer with the name LON-CL1. If you want to use other computernames that's ok. Just replace the names with your computernames.
-1. Retreive all computers from Active Directory with this command: ```Get-ADComputer –Filter *```
+For this task you will need at least two computers. We're using a domain controller with the name LON-DC1 and a Windows 10 computer with the name LON-CL1. If you want to use other computernames that's ok. Just replace the names with your computernames. Make sure you're performing this exercise from the client computer: LON-CL1.
+1. Retrieve all computers from Active Directory with this command: ```Get-ADComputer –Filter *```
 1. Send a ping to the domain controller with this command: ```ping LON-DC1```
 1. Ping was introduced in 1983, so that's a very old command. Now send a ping using a proper PowerShell command: ```Test-Connection LON-DC1```
 1. Notice the similarity in the output. Both commands send four pings, with one second intervals. The first command (ping) is a operating system utility, so the output is text only. The second command is a native PowerShell command, so it's output is more flexbile. Always try to use native PowerShell commands, instead of operating system utilities.
@@ -44,16 +46,16 @@ For this exercise you will need at least two computers. We're using a domain con
 
 
 ## Task 3: solving pipeline problems.
-1. Many errors in PowerShell are pipeline related. It's important that you're becoming fluent in handling these errors.
-1. There are generally four solutions to the problem in the previous task. There is no best solution. That's mostly personal preference. There is however a worst solution. Let's find out.
+  - Many errors in PowerShell are pipeline related. It's important that you're becoming fluent in handling these errors.
+  - There are generally four solutions to the problem in the previous task. There is no best solution. It's mostly personal preference. There is however a worst solution. Let's find out.
 
 ### Solution 1: manually editing a file
 1. Run this command: ```Get-ADComputer –Filter * | Export-Csv computers.csv```
 1. Now open the file for editing with this command: ```Notepad computers.csv```
-1. Replace DnsHostName with ComuterName is the header of the file.
+1. Replace DnsHostName with ComuterName in the header of the file.
 1. Save the file and return to the PowerShell console.
 1. Run this command to send the ping: ```Import-Csv computers.csv | Test-Connection```
-1. The ping should be sent to the computers in the csv-file successfully.
+1. The ping should be sent to the computers in the csv file successfully.
 1. Since this method involves editing a file by hand, it's not appropriate for running this command unattended, for example when running a nightly job. This would be the worst solution.
 
 ### Solution 2: using Select-Object
@@ -68,7 +70,7 @@ For this exercise you will need at least two computers. We're using a domain con
 1. Notice that the command is working.
 
 ### Solution 3: using Foreach-Object
-1. Using the Foreach-Object command you can process any output. This command is the most flexible.
+1. With the Foreach-Object command you can process any output. This command is the most flexible.
 1. Run this command: ```Get-ADComputer –Filter *```
 1. The output will display all objects from Active Directory. We call this 'rich' output. Including all metadata.
 1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Write-Host $_.Name }```
@@ -81,10 +83,18 @@ For this exercise you will need at least two computers. We're using a domain con
 1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
 1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
 1. 
+1. Notice that the command is working.
 
-### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen", in my native language: Dutch)
+### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen" in Dutch, my native language)
+1. Run this command: ```Get-ADComputer –Filter *```
+1. The output will display all objects from Active Directory.
+1. Now pipe the output to Select-Object to select the Name property as the only property to be shown in the output: ```Get-ADComputer –Filter * | Select-Object Name```
+1. The output still contains a header (metadata), which is not desirable for our solution.
+1. Use the ExpandProperty parameter from Select-Object to get rid of the metadata: ```Get-ADComputer –Filter * | Select-Object -ExpandProperty Name```
+1. The output displays computernames from Active Directory. There is no header/metadata.
+1. Now use parenthesis as input for the ComputerName parameter of TestConnection.
 1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
-1. 
+1. Notice that the command is working.
 
 ## Summary
 There are basically three solutions in case a command does not accept, or cannot process, pipeline input.
