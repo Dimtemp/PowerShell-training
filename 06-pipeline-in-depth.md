@@ -29,7 +29,7 @@
 
 
 ## Task 2: pipline binding, in depth and advanced
-For this exercise you will need at least two computers. We're using a domain controller with the name LON-DC1 and a Windows 10 computer with the name LON-CL1. If you wan't to use other computernames that's OK. Just replace the names with your computernames.
+For this exercise you will need at least two computers. We're using a domain controller with the name LON-DC1 and a Windows 10 computer with the name LON-CL1. If you want to use other computernames that's ok. Just replace the names with your computernames.
 1. Retreive all computers from Active Directory with this command: ```Get-ADComputer –Filter *```
 1. Send a ping to the domain controller with this command: ```ping LON-DC1```
 1. Ping was introduced in 1983, so that's a very old command. Now send a ping using a proper PowerShell command: ```Test-Connection LON-DC1```
@@ -68,15 +68,29 @@ For this exercise you will need at least two computers. We're using a domain con
 1. Notice that the command is working.
 
 ### Solution 3: using Foreach-Object
-1. Using the Foreach-Object you can process any output. This command is the most flexible 
-1. ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+1. Using the Foreach-Object command you can process any output. This command is the most flexible.
+1. Run this command: ```Get-ADComputer –Filter *```
+1. The output will display all objects from Active Directory. We call this 'rich' output. Including all metadata.
+1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Write-Host $_.Name }```
+1. The Write-Host command write to the screen.....................
+1. The output will display all objects from Active Directory with only it's name. There is no header, no metadata. Just the computernames without any context.
+1. Instead of writing the output to the screen, we want the output to be used as input for Test-Connection. Let's do this next.
+1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+1. ..............
+1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
 1. 
 
 ### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen", in my native language: Dutch)
 1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
 1. 
 
-## Resume
+## Summary
+There are basically three solutions in case a command does not accept, or cannot process, pipeline input.
+### Using Select-Object
 1. ```Get-ADComputer –Filter * | Select-Object @{name='ComputerName';expression={$_.Name}} | Test-Connection```
+### Using Foreach-Object
 1. ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+### Using parenthesis
 1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
