@@ -2,26 +2,68 @@
 
 #### Note: make sure you know how to work with Select-Object before performing this exercise.
 
-## Task 1:
+#### Note: make sure you are working with a computer that has the Active Directory PowerShell module installed.
+
+## Task 1: pipeline binding, in depth
 1. Open a PowerShell console.
-1. Run this command to start Paint: ```mspaint```
+1. Run this command to determine any Paint process that might be running: ```Get-Process mspaint```
+1. If this command results in an errormessage that it cannot find a process with the name "Paint": **that's good!**
+1. If there are any Paint processes running, close them by hand now, since we will stop the Paint process **a lot.**
+1. Do not continue with the next step if there are any Paint processes still running.
+1. Run this command to start Paint: ```mspaint.exe```
 1. MS Paint opens. Return to the PowerShell console, but leave Paint open.
 1. Run this command: ```Get-Help stop-process -full```
 1. Scroll to the parameters section and find all parameters that accept pipeline input. For example: the Confirm parameter specifies no pipeline input is accepted: ```Accept pipeline input? False```
 1. For all parameters that accept pipeline input, notice whether pipeline input is accepted by property name, or by value.
 1. Processes can be stopped by their process id. Run this command to get the process id of Paint: ```Get-Process mspaint```
 1. Make a note of the process id in the Id column. 
-1. stop-process [-id] <id>
-1. mspaint
-1. stop-process -name mspaint
-1. mspaint
-1. stop-process -inputopbject $a
-1. mspaint
-1. get-process mspaint | stop-process
+1. Run this command, replacing 1234 with the Id that you noted down in the previous step: ```Stop-Process -id 1234```
+1. If you entered the process id correctly then the Paint application should have been stopped. Confirm there is no Paint application running anymore.
+1. Run this command to start Paint again: ```mspaint.exe```
+1. Run this command to stop the Paint process by name: ```Stop-Process -Name mspaint```
+1. The Paint application has been stopped by referring it's name.
+1. If there are multiple processes running with the same name, they will be stopped by a single command.
+1. Run this command to start Paint once more: ```mspaint.exe```
+1. Now stop the Paint application like this: ```Get-Process mspaint | Stop-Process```
+1. You stopped the Paint application by retrieving it with a Get-Process command, and then piping the output to the Stop-Process command. Since the output is in the <Process>-form, the output will bind to the input parameter InputObject, because that's the form that is expected.
 
-## Task 2
-1. Get-ADComputer –Filter * | Test-Connection
-1. ERROR
-1. Get-ADComputer –Filter * | Select @{n='ComputerName';e={$_.Name}} | Test-Connection
-1. Get-ADComputer –Filter * | Foreach { Test-Connection -Computername $_.Name }
-1. Test-Connection –Computername (Get-ADComputer –Filter * | Select –Expand Name)
+
+## Task 2: pipline binding, in depth and advanced
+For this exercise you will need at least two computers. We're using a domain controller with the name LON-DC1 and a Windows 10 computer with the name LON-CL1. If you wan't to use other computernames that's OK. Just replace the names with your computernames.
+1. Retreive all computers from Active Directory with this command: ```Get-ADComputer –Filter *```
+1. Send a ping to the domain controller with this command: ```ping LON-DC1```
+1. Ping was introduced in 1983, so that's a very old command. Now send a ping using a proper PowerShell command: ```Test-Connection LON-DC1```
+1. Notice the similarity in the output. Both commands send four pings, with one second intervals. The first command (ping) is a operating system utility, so the output is text only. The second command is a native PowerShell command, so it's output is more flexbile. Always try to use native PowerShell commands, instead of operating system utilities.
+1. Now that you retrieved computers from Active Directory, and you have sent pings to computers on the network, let's try to use them together in a single command.
+1. Run this command: ```Get-ADComputer –Filter * | Test-Connection```
+1. This will result in several error messages. This is either because the Test-Connection command does not accept pipeline input, or the output is not in the correct format. You already saw at the beginning of this exercise that Get-ADComputer is producing output, so let's investigate what is going wrong.
+1. First, run this command to determine whether Test-Connection is accepting pipeline input, and in what format it's supposed to be: ```Get-Help Test-Connection -full```
+1. Scroll to the PARAMETERS section. Note any parameters that accept pipeline input. Focus on the line that reads "Accept pipeline input?" for each parameter. 
+1. If everything is correct there is only one parameter that accepts pipeline input: **ComputerName <String[]>**. It specifies: **Accept pipeline input?  True (ByPropertyName)**
+1. This means that output needs to include a parameter
+
+
+## Task 3: solving pipeline problems.
+1. Many errors in PowerShell are pipeline related. It's important that you're becoming fluent in handling these errors.
+1. There are generally four solutions to the problem in the previous task. There is no best solution. That's mostly personal preference. There is however a worst solution. Let's find out.
+
+### Solution 1: manually editing a file
+1. Get-ADComputer –Filter * | Export-Csv computers.csv
+1. Now open the file for editing with this command: ```Notepad computers.csv```
+1. Replace DnsHostName with ComuterName is the header of the file.
+1. Save the file and return to the PowerShell console.
+1. Run this command to send the ping: ```Import-Csv computers.csv | Test-Connection```
+1. The ping should be sent to the computers in the csv-file successfully.
+1. Since this method involves editing a file by hand, it's not appropriate for running this command unattended, for example when running a nightly job. This would be the worst solution.
+
+### Solution 2: using Select-Object
+1. ```Get-ADComputer –Filter * | Select @{n='ComputerName';e={$_.Name}} | Test-Connection```
+
+### Solution 3: using Foreach-Object
+1. ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
+
+### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen", in my native tongue: Dutch)
+1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
+
+
+
