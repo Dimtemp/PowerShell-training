@@ -13,6 +13,11 @@
 ## Task 2: Get-Command
 1. Run this command: ```Get-Command```
 1. This lists all available PowerShell commands on this system.
+1. Several things should stand out:
+  - Allmost all PowerShell commands should be formed with a well-known verb, followed by a dash (-), followed by a noun.
+  - Commands have a source. They are organized into folders to keep things manageable.
+  - The CommandType exists mostly of cmdlets and functions.
+  - In a later chapter we'll go further into this listing.
 1. Run this command: ```Get-Command *process*```
 1. This lists all available PowerShell commands on this system that contain the word **process**.
 1. Run this command: ```Get-Command -Verb Stop```
