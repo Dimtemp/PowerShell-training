@@ -24,14 +24,29 @@
 
 
 ## Task 3: The expanding universe
-1. The ExpandProperty parameter of Select-Object can display hidden or truncated information.
-1. Display the PowerShell version information: ```
-1. ```Select-Object -ExpandProperty```
+1. The ExpandProperty parameter of Select-Object can display truncated or hidden information.
+1. Display the PowerShell version information: ```$Host```
+1. Notice the Version. Now display only the version using Select-Object:
+1. ```$Host | Select-Object Version```
+1. Notice the Version. It displays in the same way as the first comand.
+1. Now display the version using the ExpandProperty of Select-Object: ```$Host | Select-Object -ExpandProperty Version```
+1. You'll notice extra information was hidden inside the version property.
 
 
 ## Task 4: Hash as in hashtable
-1. ```Select-Object @{name=''; expression={}}```
-- formula + / - / * /  /1GB
+1. With Select-Object you can replace columnheaders and perform data modifications and calculations.
+1. Let's run a WMI command to retrieve disk space (WMI is covered in a later module in depth).
+1. ```Get-WmiObject -class win32_logicaldisk```
+1. Notice the FreeSpace and Size properties. It'll probably include so many digits it's hard to tell what the size is, and how many freespace there still is.
+1. Let's perform a calculation on the data: ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={$_.Size/1GB}}```
+1. The @-sign instructs PowerShell to create a hashtable, which is a propertyname and it's value. That's what name and expression refer to within the {} brackets. The name is the name of the property. Expression refers to the formula you want to use to calculate the property value. In this case we're deviding the number of bytes by a Gigabyte.
+1. The size is now displayed in gigabytes.
+1. Let's do the same for freespace, while keeping the previous two properties: DiveID and Size.
+1. ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={$_.Size/1GB}}, @{name='FreeSpace(G)'; expression={$_.FreeSpace/1GB}}```
+1. The output probably contains a lot of digits. Let's round the numbers so we get humanreadable output.
+1. ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={[int]($_.Size/1GB)}}, @{name='FreeSpace(G)'; expression={[int]($_.FreeSpace/1GB)}}```
+
+- formula +
 - replace a column (test-connection)
 
 
