@@ -37,10 +37,11 @@
 1. With the PowerShell console open, type **ISE** and hit Enter.
 1. A graphical editor window will open.
 1. On the taskbar, right-click the Windows PowerShell ISE icon and then click **Pin to taskbar**.
-1. On the Windows PowerShell ISE toolbar, click **View** in the menu bar, and click **Show Script Pane Maximized**.
+1. On the Windows PowerShell ISE toolbar, click **View** in the menu bar, and click **Show Script Pane  Ctrl-R**.
+1. On the Windows PowerShell ISE toolbar, click **View** in the menu bar, and click **Show Script Pane Maximized  Ctrl-3**.
 1. Use the slider in the lower-right corner of the window to adjust the font size.
 1. On line 1, type ```Get-Process``` in the editor window and press the **Run Script** button in the toolbar.
 1. This wil display a process listing.
 1. Close the Editor by clicking **File** in the menu bar, and **Exit**.
-
+1. Do not save the file.
 
