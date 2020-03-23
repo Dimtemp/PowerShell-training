@@ -1,4 +1,5 @@
 # The many faces of Select-Object
+The Select-Object command is one of the most popular commands in Powershell. It can be used in four different ways. Let's take a look in each of them.
 
 ## Task 1: Selecting properties
 1. Run the following command to view all processes with a name that start with **w**. This should produce a short list.
