@@ -1,6 +1,13 @@
 # Filtering with and without Where-Object
+In this chapter we're going to filter our output. This is normally done using operators. Some of them you already know: < > =.
 
 ## Task 1: basic filtering
+1. Run this command: ```Get-Help operators```
+1. PowerShell has several helpfiles covering the use of operators.
+1. Run this command: ```Get-Help about_Operators```
+1. This is a help article about operators in general.
+1. Run this command: ```Get-Help about_Comparison_Operators```
+1. This is a help article about comparison operators.
 1. Run this command: ```Get-Process```
 1. This displays a list of all running processes. Notice the Handles column.
 1. Run this command: ```Get-Process | Where-Object Handles -GT 1000```
