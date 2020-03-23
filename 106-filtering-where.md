@@ -44,12 +44,16 @@ Only **Sick** results in false, because the **S** is not part of the **DMNR** co
 The Where-Object has a major advantage: all PowerShell output can be filtered. It also has a huge disadvantage: all output will be filtered locally, by PowerShell. Some commands allow to filter at the source. This can prevent huge data transfers across the network, or can help speed up processing.
 1. ```Get-Process -Name *sys*```
 1. This command filters all processes with **sys** in it's name. This filter is executed at the source.
-1. Run this command: Get-ChildItem -Path C:\Windows -Filter *.exe
+1. Run this command: ```Get-ChildItem -Path C:\Windows -Filter *.exe```
 1. You might get no results, depending on your PC. The command should filter only files with an .EXE extension.
-1. Get-WmiObject -Filter
-1. required filters: Some command's can generate a lot of load. To make the scripter be cautious 
-1. Get-ADComputer -Filter *
+1. Run this WMI command: ```Get-WmiObject -Class win32_service -Filter "Name='spooler'"```
+1. Notice the exact use of the quotes, the previous command includes four quotes in total: two double quotes and two single quotes.
+1. Some command's can generate a lot of load. To make the scripter aware of the impact his command can have some commands require a filter.
+1. Run this command: ```Get-ADComputer```
+1. The command will ask for a filter if not provided. Type * at the prompt and press Enter.
+1. Run this command: ```Get-ADComputer -Filter *```
+1. This way you can run the command, without it prompting you for input.
 
 
 ## Filter left, format right.
-A famous paradigm in PowerShell is: **filter left, format right**. This means you should filter output as soon as possible. At the source, when available. Filtering using Where-Object is flexbile, but also more costly in terms of processing time and/or network transfers. Formatting is done on the right. To be precise: in the last part of your PowerShell command. If you're formatting for users, changes are you 
+A famous paradigm in PowerShell is: **filter left, format right**. This means you should filter output as soon as possible. At the source, when available. Filtering using Where-Object is flexbile, but also more costly in terms of processing time and/or network transfers. Formatting is done on the right. To be precise: in the last part of your PowerShell command.
