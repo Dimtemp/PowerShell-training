@@ -34,7 +34,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. ```Remove-Item Folder3```
 
 
-# Task: creating drive mappings
+## Task: creating drive mappings
 1. Run this command to create a drivemapping to the domain controller:
 1. ```New-PSDrive –Name N –Root '\\LON-DC1\NETLOGON' –PSProvider FileSystem```
 1. Note: in MS-DOS and later Operating Sysyems, we would have run ```Net USE N: \\LON-DC1\NETLOGON```
@@ -49,6 +49,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 
 
 ## Task: certificate store
+#### Note: this only works on Windows.
 1. Run this command: ```Get-ChildItem Cert:\```
 1. This displays to locations: CurrentUser and LocalMachine.
 1. Let's navigate to LocalMachine: ```Get-ChildItem Cert:\LocalMachine\```
@@ -60,14 +61,31 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. This final command displays extra properties, like an expiration date (NotAfter).
 
 
-# Task: Registry
-### Note: this only works on Windows.
-1. ```New-Item –Path HKCU:\Software –Name Scripts```
-1. ```New-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Run -Name 'PowerShell' –Value 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'```
+## Task: Registry
+#### Note: this only works on Windows.
+1. Run this command to inspect the registry: ```Get-ChildItem HKCU:```
+1. Run this command: ```regedit```
+1. Navigate to this key: HKEY_CURRENT_USER\Control Panel\Desktop
+1. Notice the Wallpaper setting near the bottom.
+1. Return to the PowerShell console (leave regedit open).
+1. Run this command to inspect the registry: ```Get-ChildItem HKCU:\Control Panel\Desktop```
+1. Now compare the output with regedit. In PowerShell, only data is displayed in the subfolder from the current location. We need another command to inspect the registry settings from the current location:
+1. Run this command to inspect the registry: ```Get-Item HKCU:\Control Panel\Desktop```
+1. Now the wallpaper item is visible.
+1. Create a new folder in the registry: ```New-Item –Path HKCU:\Software –Name MyCompany```
+1. Create an item in the folder: ```New-ItemProperty -Path HKCU:\Software\MuCompany -Name 'PortNumber' –Value '443'```
+1. Inspect the new items with regedit.
 
 
 ## Task: environment variables
-1. 
+#### Note: this only works on Windows.
+1. Run this command to display all environment variables: ```Get-ChildItem Env:```
+1. Inspect a single environment variable: ```$Env:Path```
+1. Notive the $-sign: it tells PowerShell to work with the contents of the environment value. Also notice we don't need Get-ChildItem anymore.
+1. The previous command would be like this in MS-DOS: ```echo %PATH%``` (this doesn't work in PowerShell).
+1. Pipe the output to Get-Member to inspect it's properties: ```$Env:Path | Get-Member```
+1. Notice the TypeName on top: it should be System.String.
+1. Since the path is a string (expected), we can use a method to make it more readable:  ```$Env:Path.Split(';')```
 
 
 ## Task: aliases
@@ -76,12 +94,33 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Run this command: ```Get-Alias```
 1. This displaus the same alias listing. There is no difference.
 
-## Task: functions
-1.
-
 
 ## Task: variables
-1. 
+1. Run this command (notice the trailing colon ':'): ```Get-ChildItem Variable:```
+1. Most variables are system variables, because we haven't created many variables yet.
+1. Run this command to create a variable: ```$x = 15```
+1. Inspect with: ```Get-ChildItem Variable:```
+1. Notice the variable at the bottom with the name x, and the Value 15. The $-sign is not shown, because the $-sign is not a part of the name of the variable. It informs PowerShell we want to work with the value of the variable.
+1. Run this command to create a variable: ```New-Variable -Name y -Value 20```
+1. Inspect with: ```$y```
 
 
-
+## Task: functions
+1. Run this command (and notice the final colon ':'): ```Get-ChildItem Function:```
+1. There are a few functions that are special:
+1. - help: which in it's turn, calls Get-Help.
+1. - prompt: which contains the definition of the PowerShell prompt.
+1. - TabExpansion2: which is called everytime you press Tab.
+1. Let's focus on one function. Run this command to view the prompt command: ```Get-Command prompt```
+1. It informs us the prompt is a function, which we alread knew.
+1. Pipe it to Get-Member to inspect other properties: ```Get-Command prompt | Get-Member```
+1. It tells us there's a Definition property (somewhere in the middle of the listing).
+1. Run this command to view the prompt definition: ```Get-Command prompt | Select-Object definition```
+1. PowerShell decides not to show the definition, because it might be too big.
+1. Run this command to view the prompt definition: ```Get-Command prompt | Select-Object -ExpandProperty definition```
+1. You're viewing the definition of the prompt.
+1. You can change the prompt easily. Just define a new function. Remember, these functions only exist in memory. If you screw up, just close the PowerShell window.
+1. Run this command to customize the prompt: ```function prompt { '> ' }```
+1. This is a very minimalistic prompt.
+1. Run this command for a prompt that resembles the Linux prompt: ```function prompt { "$env:USERNAME@$env:COMPUTERNAME >" }```
+1. Close the PowerShell window.
