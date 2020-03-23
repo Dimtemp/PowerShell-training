@@ -63,4 +63,6 @@ The Where-Object has a major advantage: all PowerShell output can be filtered. I
 
 
 ## Filter left, format right.
-A famous paradigm in PowerShell is: **filter left, format right**. This means you should filter output as soon as possible. At the source, when available. Filtering using Where-Object is flexbile, but also more costly in terms of processing time and/or network transfers. Formatting is done on the right. To be precise: in the last part of your PowerShell command.
+A famous paradigm in PowerShell is: **filter left, format right**. This means you should filter output as soon as possible. At the source, when available. Filtering using Where-Object is flexbile, but also more costly in terms of processing time and/or network transfers.
+
+Formatting is done on the right. To be precise: in the last part of your PowerShell command. This will be discussed in a later chapter.
