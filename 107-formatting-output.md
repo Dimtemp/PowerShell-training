@@ -45,7 +45,7 @@ You can convert any table into a list, or any list into a table. Beware that you
 
 
 ## Task 2: Format operator
-The format operator can do some advanced formatting. It's used regularly to maken things more human readable.
+The format operator can do some advanced formatting. It's used regularly to make things more human readable.
 1. Run this command: ```'number of bytes free: 3485872643'```
 1. Notice the lack of a Write-Host command. Again, we're just generating a (text) string, that's is displayed on screen by default. Since we have a number with many digits it's hard to tell how many megabytes or gigabytes are still free.
 1. Run this command: ```'number of bytes free: {0}' -f 3485872643```
@@ -78,5 +78,6 @@ The first character starts at 0. This command displays the first two characters:
 1. Run this command: ```'Greetings'.StartsWith('G')```
 1. Should be true.
 1. Run this command: ```'Greetings'.StartsWith('K')```
+1. Should return false.
 1. Run this command: ```'Greetings'.PadLeft(15)```
 1. The left of the output is padded with spaces so the total length will be 15.
