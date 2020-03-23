@@ -7,7 +7,7 @@ WMI stands for Windows Management Instrumenation. So it's an **instrument**, for
 WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That's the biggest advantage of WMI: it's part of all Windows operating systems since 1995. It's still part of Windows Server 2019 and Windows 10.
 
 
-# Task 1: Working with WMI
+## Task 1: Working with WMI
 1. Run this command: ```Get-WmiObject win32_bios```
 1. This displays BIOS information.
 1. Run this command: ```Get-WmiObject win32_computersystem```
@@ -21,8 +21,7 @@ WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That
 1. Run this command: ```Get-WmiObject Win32_LogicalDisk```
 
 
-
-# Task 2: Filtering WMI Objects
+## Task 2: Filtering WMI Objects
 1. Run this command: ```Get-WmiObject –Class Win32_Service```
 1. This displays all services.
 1. Run this command: ```Get-WmiObject –Class Win32_Service -Filter "Name LIKE 'Sp%'"
@@ -39,7 +38,7 @@ WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That
 1. Now return the service to the automatic start mode using Set-Service: ```Set-Service Spooler -StartupType Automatic```
 
 
-# Task 3: CIM sessions
+## Task 4: CIM sessions
 CIM stands for Common Information Model. It's an open standard that defines how managed elements in an IT environment are represented (source: Wikipedia). It has many of the same goals as WMI, but it's implementation in PowerShell is more modern.
 
 1. Run this command to open a session to a remote computer: ```$s = New-CimSession –ComputerName LON-DC1```
