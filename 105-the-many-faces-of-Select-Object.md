@@ -11,8 +11,8 @@ The Select-Object command is one of the most popular commands in Powershell. It 
 
 
 ## Task 2: The first will be last
-1. The First and Last parameters of Select-Object can return a shorter list so you can focus on the biggest or smallest items. For instance: only display the disks with the least free disk space.
-1. ```Get-Process | Select-Object -First 10```
+1. The First and Last parameters of Select-Object can return a shorter list so you can focus on the biggest or smallest items. For example: disk space, memory usage, network bandwidth.
+1. Run this command to display the first 10 processes: ```Get-Process | Select-Object -First 10```
 1. Notice only 10 processes are returned.
 1. ```Get-Process | Select-Object -Last 10```
 1. Notice that the process listing is sorted alphabetically. We'll sort on workingset (WS), which gives an indication on memory usage.
