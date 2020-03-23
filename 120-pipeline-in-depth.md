@@ -4,7 +4,7 @@
 
 #### Note: as with most PowerShell exercises, it's best not to copy-paste the command's, but to actually type them. Use keyboard navigation (arrow up/down, home, end) to speed up entering commands in PowerShell.
 
-#### Note: make sure you are working with a computer that has the Active Directory PowerShell module installed.
+#### Note: make sure you are working with a computer that has the Active Directory PowerShell module installed. In the lab environment, we work with the LON-CL1 virtual machine.
 
 ## Task 1: pipeline binding, in depth
 1. Open a PowerShell console.
@@ -74,15 +74,9 @@ For this task you will need at least two computers. We're using a domain control
 1. Run this command: ```Get-ADComputer –Filter *```
 1. The output will display all objects from Active Directory. We call this 'rich' output. Including all metadata.
 1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Write-Host $_.Name }```
-1. The Write-Host command write to the screen.....................
-1. The output will display all objects from Active Directory with only it's name. There is no header, no metadata. Just the computernames without any context.
+1. The Write-Host command writes the names of the three computer objects from Active Directory to the screen. There is no header, no metadata. Just the computername without any context.
 1. Instead of writing the output to the screen, we want the output to be used as input for Test-Connection. Let's do this next.
 1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
-1. ..............
-1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
-1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
-1. Run this command: ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
-1. 
 1. Notice that the command is working.
 
 ### Solution 4: Please Excuse My Dear Aunt Sally (or "Hoe moeten wij van de onvoldoendes afkomen" in Dutch, my native language)
