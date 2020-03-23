@@ -8,7 +8,7 @@ In this exercise we're going to work with different file types. You'll discover 
 1. Open PowerShell.
 1. Create a new file which contains three usernames with this command:
 1. ```'Alice', 'Bob', 'Carol' | Out-File userlist.txt```
-1. Please note the special use of punctuation marks. We're creating three users surrounded by quotationmarks, three users are separated by two comma's.
+1. Please note the special use of punctuation marks. We're creating three users surrounded by quotationmarks. Three users are separated by two comma's.
 1. Read the text file with this command: ```Get-Content userlist.txt```
 1. Notice three users are returned on three different lines.
 
@@ -27,7 +27,7 @@ In this exercise we're going to work with different file types. You'll discover 
 Note: you might be able to use Select-Object and Sort-Object on text files using ConvertFrom-String, but it's a best practice to avoid using text files.
 
 
-## Task 2: Comma Seperated Values (CSV) files
+## Task 3: Comma Seperated Values (CSV) files
 1. Run this command: ```Get-Process w*```
 1. A short process listing is displayed on the screen.
 1. Run this command: ```Get-Process w* | Export-CSV procs.csv```
@@ -36,20 +36,18 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. The output looks a lot different than the table we had in the first place. This is because all data is being exported to disk. That's the default in PowerShell. It handles all data. Only when data is being written to screen, it has to decide whether output to screen should be formatted in a more user-friendly way.
 
 
-## Task 3: Extensible Markup Language (XML) files
+## Task 4: Extensible Markup Language (XML) files
 1. This command might take some time: ```Get-Process w* | Export-CliXML procs.xml```
-1. Import the process listing to verify it's read correctly. Unlike the CSV file, this import presents a nice table.
-1. Run this command: ```Import-CliXML procs.xml```
-1. Verify that all hidden properties are still available.
-1. Run this command: ```Import-CliXML procs.xml | Select-Object Id, ProcessName, Path```
-1. Verify that hidden properties are sortable.
-1. Run this command: ```Import-CliXML procs.xml | Select-Object Id, ProcessName, Path | Sort-Object Id```
+1. Import the process listing to verify it's read correctly: ```Import-CliXML procs.xml```
+1. Unlike the CSV file, this import presents a nice table.
+1. Verify that all hidden properties are still available: ```Import-CliXML procs.xml | Select-Object Id, ProcessName, Path```
+1. Verify that properties are sortable: ```Import-CliXML procs.xml | Sort-Object Id | Select-Object Id, ProcessName, Path```
 
 
-## Task 4: Using Compare-Object
+## Task 5: Using Compare-Object
 1. Export another process listing. Please notice it's an unfiltered list (without w*), and we're writing to a new file (procs-A.xml).
-1. Run this command: ```Get-Process | Export-CliXML procs-A.xml```
-1. Run this command: ```Import-CliXML procs-A.xml```
+1. Run this command to export the process listing: ```Get-Process | Export-CliXML procs-A.xml```
+1. Run this command to verify the file: ```Import-CliXML procs-A.xml```
 1. Start a process by entering this command: Notepad
 1. You now have notepad running.
 1. Export the current list of processes to another new file: ```Get-Process | Export-CliXML procs-B.xml```
