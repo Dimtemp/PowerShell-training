@@ -32,48 +32,60 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. A short process listing is displayed on the screen.
 1. Run this command: ```Get-Process w* | Export-CSV procs.csv```
 1. A short process listing has been exported to CSV.
+1. Inspect the CSV with notepad: ```notepad procs.csv```
+1. The contents in notepad look a lot different than the table we had in the first place. This is because all data has been exported to disk.
+1. Also notice two particular fields in the header of the file: Path and Company.
 1. Import the CSV file using this command: ```Import-CSV procs.csv```
-1. The output looks a lot different than the table we had in the first place. This is because all data is being exported to disk. That's the default in PowerShell. It handles all data. Only when data is being written to screen, it has to decide whether output to screen should be formatted in a more user-friendly way.
+1. The output looks a lot different than the table we had in the first place. That's because all data is present in the CSV file. Not just the eight (or so) columns in the original table. During import, PowerShell doesn't recognize it's a process listing, so it displays all the information.
+1. Notice we can select properties that were not shown previously: ```Import-CSV procs.csv | Select-Object Company, ProcessName, Path```
+1. We can try to format the output like the table that Get-Process produces: ```Import-CSV procs.csv | Select-Object Handles, NPM, PM, WS, ID, ProcessName```
+1. Try to sort on ProcessName: ```Import-CSV procs.csv | Sort-Object ProcessName | Select-Object Handles, ProcessName```
+1. It works. Now try to sort on Handles: ```Import-CSV procs.csv | Sort-Object Handles | Select-Object Handles, ProcessName```
+1. The Handles column is sorted alphabetically, and not numerically. This has no use to me. Clearly, the CSV output is not as human friendly as the first table. Maybe an XML file can help.
 
 
 ## Task 4: Extensible Markup Language (XML) files
 1. This command might take some time: ```Get-Process w* | Export-CliXML procs.xml```
+1. Verify the file with Notepad: ```notepad procs.xml```
+1. It should be recognizable as a XML file. Close notepad.
 1. Import the process listing to verify it's read correctly: ```Import-CliXML procs.xml```
-1. Unlike the CSV file, this import presents a nice table.
-1. Verify that all hidden properties are still available: ```Import-CliXML procs.xml | Select-Object Id, ProcessName, Path```
-1. Verify that properties are sortable: ```Import-CliXML procs.xml | Sort-Object Id | Select-Object Id, ProcessName, Path```
+1. Unlike the CSV file, this import presents a nice table. This is because, unlike the CSV, metadata is retained. You can verify with Get-Member.
+1. Run this command: ```Import-CliXML procs.xml | Get-Member```
+1. Scroll to the beginning of the output and verify that the first line reads: **TypeName: Deserialized.System.Diagnostics.Process**
+1. This way, PowerShell can recognize it's a process listing.
+1. Verify that all hidden properties are still available: ```Import-CliXML procs.xml | Select-Object Company, ProcessName, Path```
+1. Verify that properties are sortable: ```Import-CliXML procs.xml | Sort-Object Handles | Select-Object Handles, ProcessName, Path```
 
 
 ## Task 5: Using Compare-Object
-1. Export another process listing. Please notice it's an unfiltered list (without w*), and we're writing to a new file (procs-A.xml).
+1. Export another process listing. Please notice it's an unfiltered list (without w*), and we're writing to a new file (**procs-A.xml**).
 1. Run this command to export the process listing: ```Get-Process | Export-CliXML procs-A.xml```
 1. Run this command to verify the file: ```Import-CliXML procs-A.xml```
-1. Start a process by entering this command: Notepad
-1. You now have notepad running.
+1. Start a new process by entering this command: ```mspaint```
+1. You now have Paint running.
 1. Export the current list of processes to another new file: ```Get-Process | Export-CliXML procs-B.xml```
+1. We're going to read the two XML files into memory, and store them in a variable. Variables are discussed in-depth later.
 1. Run this command: ```$procsA = Import-CliXML procs-A.xml```
 1. Run this command: ```$procsB = Import-CliXML procs-B.xml```
 1. Run this command: ```Compare-Object $procsA $procsB```
 1. ?
+1. Run this command: ```Compare-Object $procsA $procsB -???????????```
 1. You can do the same without exporting the second process listing to XML. Just write the output to a variable, instead of an XML file.
 1. Run this command: ```$procsB = Get-Process```
 1. Run this command: ```Compare-Object $procsA $procsB```
-1. Note: $procsA is still populated with the first processlisting. There's no need to perform another export.
+1. Note: $procsA is still populated with the first process listing. There's no need to perform another export.
 
 
 ## Task 5: HTML files
-1. To display a list of running processes, that shows only the number of handles, Id and process name
-1. Run this command: ```Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName```
-1. To convert the process list to an HTML page, run:
-1. Run this command: ```Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName | ConvertTo-HTML```
-1. To save the HTML page in a file, run:
-1. Run this command: ```Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName | ConvertTo-HTML | Out-File Report.html```
-1. To view the HTML file, run:
-1. Run this command: ```Invoke-Item Report.html```
+1. Run this command to display a list of running processes, that show only the working set (WS), Id and process name, sorted by working set: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10```
+1. To convert the process list to an HTML page, run this command: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML```
+1. The HTML output is displayed in the PowerShell console window. That's not what we want.
+1. To save the HTML page to a file, run: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML | Out-File Report.html```
+1. To view the HTML file, run: ```Invoke-Item Report.html```
+1. If this doesn't work, navigate to the file with Windows Explorer and double click it.
 1. To create another HTML file, run:
-1. Run this command: ```Get-Process | Sort-Object Handles -Descending | Select-Object -First 10 Handles, Id, ProcessName | ConvertTo-HTML –PreContent 'Biggest Processes by handle count' –PostContent (Get-Date) | Out-File Report.html```
-1. To view the HTML file, run:
-1. Run this command: ```Invoke-Item Report.html```
+1. Run this command: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML –PreContent 'Biggest Processes by working set' –PostContent (Get-Date) | Out-File Report.html```
+1. To view the HTML file, run: ```Invoke-Item Report.html```
 
 Results: After completing this exercise, you will have converted objects to different forms of data.
 
