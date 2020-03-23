@@ -57,14 +57,26 @@ The format operator can do some advanced formatting. It's used regularly to make
 
 
 ## Task 3: handling Strings
-1. Write-Host "Greetings"
-1. "Greetings".ToUpper()
-1. "Greetings".ToLower()
-1. "Greetings".Replace('ings','ed').ToUpper()
-1. "server1 server2 server3".split()
-1. Display the sixth through the eighth characters
-1. "Greetings".Substring(5,3)
-1. "Greetings".Length
+1. Run this command: ```Write-Host 'Greetings'```
+1. Greetings is displayed on the screen. We don't need Write-Host to display a message. When we're processing strings, it's not always meant to be written to the screen.
+1. Run the command again, without the Write-Host command: ```'Greetings'```
+1. A string object contains one property and a lot of methods. Pipe the string to Get-Member to inspect: ```'Greetings' | Get-Member```
+1. Notice the Length property of the string object. Run this command to inspect the length property: ```'Greetings'.length```
+1. The result should be 9.
+1. Scroll back and notice there are many methods present on a string object. Let's try a few.
+1. Run this command to convert the string to upper case: ```'Greetings'.ToUpper()```
+1. Run this command to convert the string to lower case: ```'Greetings'.ToLower()```
+1. Run this command to replace a section of the string: ```'Greetings'.Replace('ings','ed')```
+1. Greeted should be displayed.
+1. Methods can be nested. Run this command to replace a section of the string AND convert it to upper case: ```'Greetings'.Replace('ings','ed').ToUpper()```
+1. Another method is split. Run it to split a string on space: ```'server1 server2 server3'.split()```
+1. You can split on other characters as well: ```'user1@company.com;user2@company.com'.split(';')```
+1. Use the substring method to display a portion of the string: ```'Greetings'.Substring(5,3)```
+1. This displays the sixth through the eighth characters.
+The first character starts at 0. This command displays the first two characters: ```'Greetings'.Substring(0,2)```
 1. True or False, depending on whether the string starts with the value G.
-1. "Greetings".StartsWith('G')
-1. "Greetings".PadLeft(10)
+1. Run this command: ```'Greetings'.StartsWith('G')```
+1. Should be true.
+1. Run this command: ```'Greetings'.StartsWith('K')```
+1. Run this command: ```'Greetings'.PadLeft(15)```
+1. The left of the output is padded with spaces so the total length will be 15.
