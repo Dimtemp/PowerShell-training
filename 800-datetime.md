@@ -1,6 +1,6 @@
-# working with date and time
+# Working with date and time
 
-## Task 1: working with date and time
+## Task 1: using Get-Date
 1. Run this command to display the current date and time: ```Get-Date```
 1. Run this command to inspect the DateTime object: ```Get-Date | Get-Member```
 1. Notice the Get-Date command produces a System.DateTime object (top of the Get-Member output). It has many intereseting methods and properties.
@@ -19,12 +19,13 @@
 1. Notice any differencse in your local time.
 1. Run this command to display a long date string: ```$now.ToLongTimeString()```
 
+
 ## Task 2: working with timespans
 1. Run this command to inspect the contents of the $now variable: ```$now```
 1. Run this command to store the current datetime in a new variable: ```$later = Get-Date```
-1. Run this command to subtract both object: ```$later - $now```
+1. Run this command to subtract both objects: ```$later - $now```
 1. You get a timespan object.
 1. Store the timespan object in a variable: ```$timespan = $later - $now```
 1. Retrieve several properties from your timespan object:
-1. $timespan.TotalMinutes is the number of minutes that has elapsed.
-1. $timespan.TotalSeconds is the number of seconds that has elapsed. Notice these fields exclude each other.
+1. ```$timespan.TotalMinutes``` is the number of minutes that has elapsed.
+1. ```$timespan.TotalSeconds``` is the number of seconds that has elapsed. Notice these two fields exclude each other.
