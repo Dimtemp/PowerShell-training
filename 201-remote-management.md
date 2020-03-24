@@ -39,8 +39,8 @@ In the previous task you created an interactive sessions. This can not be used i
 1. Confirm every question with Y.
 1. Return to the LON-CL1 virtual machine.
 1. Open a PowerShell console.
-1. Run this command: ```Invoke-Command { Get-ChildItem C:\ } -ComputerName LON-DC1, LON-SVR1
-1. Pay special attention on the spelling of the LON-SVR1 computername.
+1. Run this command: ```Invoke-Command { Get-ChildItem C:\ } -ComputerName LON-DC1, LON-SVR1```
+1. Pay special attention on the spelling of the **LON-SVR1** computername.
 1. Notice we're running this command to two servers at the same time. Also notice the output, which contains the PSComputerName, to indicate from what machine the data was coming from.
 
 By default, a remote session can work with 32 computers at the same time. This can be influenced by the ThrottleLimit parameter.
