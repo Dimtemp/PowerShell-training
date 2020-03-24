@@ -89,13 +89,13 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. Again, we're going to read the two XML files into memory, and store them in a variable.
 1. Run this command to import the first processlist: ```$svcA = Import-CliXML service-A.xml```
 1. Run this command to import the second process list: ```$svcB = Import-CliXML service-B.xml```
-1. Run this command to compare the two process listings: ```Compare-Object $procsA $procsB```
+1. Run this command to compare the two process listings: ```Compare-Object $svcA $svcB```
 1. The output of this command is empty. We expect Compare-Object to display the differences in the two service listings. You should inform Compare-Object what to specifically look for. Let's choose Name as the property that we want to see when looking for differences.
-1. Run this command: ```Compare-Object $serviceA $serviceB -Property Name```
+1. Run this command: ```Compare-Object $svcA $svcB -Property Name```
 1. Again, the output is empty. That's because no services were created or removed since we created the first XML file.
-1. Now focus on a change in status (running or stopped): ```Compare-Object $serviceA $serviceB -Property Status```
+1. Now focus on a change in status (running or stopped): ```Compare-Object $svcA $svcB -Property Status```
 1. The result is that 'something' is running, and 'something' is stopped.
-1. To view **which** service has a change in state we need to inform Compare-Object to focus on two properties. Any changes in Name and/or state should be displated: ```Compare-Object $serviceA $serviceB -Property Name, Status```
+1. To view **which** service has a change in state we need to inform Compare-Object to focus on two properties. Any changes in Name and/or state should be displated: ```Compare-Object $svcA $svcB -Property Name, Status```
 1. Now the Spooler service is displayed with it's state in the original file (SideIndicator: '<='), and it's state in the second file (SideIndicator: '=>').
 
 
@@ -109,7 +109,7 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. Some time later, we need to verify the current service listing with the one stored on disk.
 1. First, read the XML file into a variable: ```$svcA = Import-CliXML service-A.xml```
 1. Second, save the current service list directly to a variable: ```$svcB = Get-Service```
-1. Compare the two variables: ```Compare-Object $serviceA $serviceB -Property Name, Status```
+1. Compare the two variables: ```Compare-Object $svcA $svcB -Property Name, Status```
 1. This procedure is a lot shorter than the procedure in task 6. We only need to store the XML file once, to perform comparisons on the current state.
 
 
