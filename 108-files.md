@@ -113,15 +113,14 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. This procedure is a lot shorter than the procedure in task 6. We only need to store the XML file once, to perform comparisons on the current state.
 
 
-## Task 5: HTML files
+## Task 8: HTML files
 1. Run this command to display a list of running processes, that show only the working set (WS), Id and process name, sorted by working set: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10```
 1. To convert the process list to an HTML page, run this command: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML```
 1. The HTML output is displayed in the PowerShell console window. That's not what we want.
 1. To save the HTML page to a file, run: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML | Out-File Report.html```
 1. To view the HTML file, run: ```Invoke-Item Report.html```
 1. If this doesn't work, navigate to the file with Windows Explorer and double click it.
-1. To create another HTML file, run:
-1. Run this command: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML –PreContent 'Biggest Processes by working set' –PostContent (Get-Date) | Out-File Report.html```
+1. To create another HTML file, run: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML –PreContent 'Biggest Processes by working set' –PostContent (Get-Date) | Out-File Report.html```
 1. To view the HTML file, run: ```Invoke-Item Report.html```
 
 Results: After completing this exercise, you will have converted objects to different file formats.
