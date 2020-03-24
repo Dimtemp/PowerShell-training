@@ -68,12 +68,12 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Navigate to this key: HKEY_CURRENT_USER\Control Panel\Desktop
 1. Notice the Wallpaper setting near the bottom.
 1. Return to the PowerShell console (leave regedit open).
-1. Run this command to inspect the registry: ```Get-ChildItem HKCU:\Control Panel\Desktop```
+1. Run this command to inspect the registry: ```Get-ChildItem 'HKCU:\Control Panel\Desktop'```
 1. Now compare the output with regedit. In PowerShell, only data is displayed in the subfolder from the current location. We need another command to inspect the registry settings from the current location:
-1. Run this command to inspect the registry: ```Get-Item HKCU:\Control Panel\Desktop```
+1. Run this command to inspect the registry: ```Get-Item 'HKCU:\Control Panel\Desktop'```
 1. Now the wallpaper item is visible.
 1. Create a new folder in the registry: ```New-Item –Path HKCU:\Software –Name MyCompany```
-1. Create an item in the folder: ```New-ItemProperty -Path HKCU:\Software\MuCompany -Name 'PortNumber' –Value '443'```
+1. Create an item in the folder: ```New-ItemProperty -Path HKCU:\Software\MyCompany -Name 'PortNumber' –Value 443```
 1. Inspect the new items with regedit.
 
 
