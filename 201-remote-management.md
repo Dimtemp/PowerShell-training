@@ -31,14 +31,24 @@ In the previous task you created an interactive sessions. This can not be used i
 1. ```Invoke-Command { Restart-Service $Using:a } -ComputerName LON-DC1```
 1. Short and simple.
 
+
 ## Task 3: fan out
-By default, a remote session can work with 32 computers at the same time. This can be influence by the ThrottleLimit parameter.
+1. Log on to the LON-SVR1 virtual machine as Administrator.
+1. Open a PowerShell console.
+1. Run this command to enable PowerShell remoting: ```Enable-PSRemoting```
+1. Confirm every question with Y.
+1. Return to the LON-CL1 virtual machine.
+1. Open a PowerShell console.
+1. Run this command: ```Invoke-Command { Get-ChildItem C:\ } -ComputerName LON-DC1, LON-SVR1
+1. Pay special attention on the spelling of the LON-SVR1 computername.
+1. Notice we're running this command to two servers at the same time. Also notice the output, which contains the PSComputerName, to indicate from what machine the data was coming from.
 
-Enable-PSRemoting # -force
+By default, a remote session can work with 32 computers at the same time. This can be influenced by the ThrottleLimit parameter.
 
 
-## Task 3: remoting sessions
-1. Run this command: ```$PCs = New-PSSession –ComputerName Server1, Server2, Client1
-1. Run this command: ```$PCs
-1. Run this command: ```Invoke-Command –Session $PCs –ScriptBlock { gwmi win32_logicaldisk } | Select PSComputerName, Name, Freespace
-
+## Task 4: remoting sessions
+You can create persistent sessions to remote computers. This can give better performance when running many commands remotely.
+1. Run this command to create a session to two computers and store them in a variable: ```$MyComputers = New-PSSession –ComputerName LON-DC1, LON-SVR1```
+1. Run this command to inspect the sessions: ```$MyComputers```
+1. Run this command to use the session: ```Invoke-Command –Session $MyComputers –ScriptBlock { Get-WmiObject win32_logicaldisk } | Select-Object PSComputerName, Name, Freespace```
+1. Run this command to close the session: ```$MyComputers | Remove-PSSession```
