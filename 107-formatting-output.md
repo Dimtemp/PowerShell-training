@@ -30,7 +30,7 @@ You can convert any table into a list, or any list into a table. Beware that you
 1. Run this command: ```Write-Host 'Goodmorning' -ForegroundColor red -BackgroundColor black```
 1. Using Write-Host you can write to the screen, and set colors to do so.
 1. Run this command: ```Write-Host 'Goodmorning' -ForegroundColor red -BackgroundColor black | Out-File test.txt```
-1. Notice the output on the screen.
+1. Notice the output on the screen. Powershell writes the output to the screen, and not in the file.
 1. List the file with this command: ```Get-ChildItem test.txt```
 1. Open the file with notepad: ```notepad test.txt```
 1. Notice the file is empty. This is because Write-Host is writing to the hosting environment, which is the console window.
