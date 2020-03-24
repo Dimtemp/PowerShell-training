@@ -36,15 +36,15 @@ PowerShell has mapped many databases and repositories (also called providers) to
 
 ## Task: creating drive mappings
 1. Run this command to create a drivemapping to the domain controller:
-1. ```New-PSDrive –Name N –Root '\\LON-DC1\NETLOGON' –PSProvider FileSystem```
-1. Note: in MS-DOS and later Operating Sysyems, we would have run ```Net USE N: \\LON-DC1\NETLOGON```
-1. Inspect with ```Get-ChildItem N:\```
+1. ```New-PSDrive –Name S –Root '\\LON-DC1\SYSVOL' –PSProvider FileSystem```
+1. Note: in MS-DOS and later Operating Sysyems, we would have run ```Net USE S: \\LON-DC1\SYSVOL```
+1. Inspect with ```Get-ChildItem S:\```
 1. Run this command to create a mapping to an existing folder:
 1. ```New-PSDrive –Name Programs –Root 'C:\Program Files' –PSProvider FileSystem```
 1. Inspect with ```Get-ChildItem Programs:\```
 1. Since drives are not limited anymore to one driveletter, the number of drives is virtually endless. There's one catch: drives you create here are not presented in Windows and/or Windows Explorer, unless you make the persistent.
 1. This is the only way to make drives visible in Windows, which are actually ordinary drive mappings to network shares:
-1. ```New-PSDrive –Name L –Root '\\LON-DC1\NETLOGON' –PSProvider FileSystem -Persist```
+1. ```New-PSDrive –Name S –Root '\\LON-DC1\SYSVOL' –PSProvider FileSystem -Persist```
 1. Notice the Persist parameter, to make the mapping show up in Windows Explorer, and survive reboots.
 
 
