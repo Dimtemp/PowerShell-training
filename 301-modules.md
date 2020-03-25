@@ -38,12 +38,17 @@ Modules are primarily stored in folders that are part of a search path. This way
 1. - C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 1. Microsoft uses the last folder to store their modules, so this is a no-go for us.
 1. You must decide whether to store your module in your Documents folder, or in the Program Files folder. A best practice would be to first store the module in your Documents folder, and then deploy it to other machines' Program Files folder.
-1. Create a WindowsPowerShell folder in your documents folder: ```mkdir -Path $home\Documents\WindowsPowerShell```
-1. Create a modules folder in your WindowsPowerShell folder: ```mkdir -Path $home\Documents\WindowsPowerShell\Modules```
-1. Create a MyFirstModule folder in your modules folder: ```mkdir -Path $home\Documents\WindowsPowerShell\Modules\MyFirstModule```
-1. Create a PowerShell module in the last folder: ```notepad $home\Documents\WindowsPowerShell\Modules\MyFirstModule\MyFirstModule.psm1```
+1. Create a WindowsPowerShell folder in your documents folder:
+1. ```mkdir -Path $home\Documents\WindowsPowerShell```
+1. Create a modules folder in your WindowsPowerShell folder:
+1. ```mkdir -Path $home\Documents\WindowsPowerShell\Modules```
+1. Create a MyFirstModule folder in your modules folder:
+1. ```mkdir -Path $home\Documents\WindowsPowerShell\Modules\MyFirstModule```
+1. Create a PowerShell module in the last folder:
+1. ```notepad $home\Documents\WindowsPowerShell\Modules\MyFirstModule\MyFirstModule.psm1```
 1. When notepad runs, anwer Yes to create the file.
-1. In Notepad create a function: ```function motd { 'Old programmers never die... They just decompile.' }```
+1. In Notepad create a function:
+1. ```function motd { 'Old programmers never die... They just decompile.' }```
 1. Save the file, close Notepad, and return to the PowerShell console.
 1. Run the function: ```motd```
 1. This should display **Old programmers never die... They just decompile.** on the screen.
@@ -63,7 +68,8 @@ Function Get-DiskSpace {
 ```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
 1. Inspect the modules present in memory: ```Get-Module```
-1. The MyFirstModule might still be present in memory. Unload it using this command: ```Remove-Module MyFirstModule```
+1. The MyFirstModule might still be present in memory. Unload it using this command:
+1. ```Remove-Module MyFirstModule```
 1. We unload the module, because the last version of our module includes a new function. The old version was still present in memory, without the new function.
 1. Now run the new function: ```Get-DiskSpace```
 1. This should display the local fixed disks.
@@ -73,7 +79,8 @@ Function Get-DiskSpace {
 1. This script doesn't run on remote computers. This is easily fixed, since WMI is a protocol meant to manage large networks.
 1. Create a new line between the Function line and the Get-WmiObject line.
 1. Write this on that empty line: ```param($ComputerName)```
-1. Modify the next line so it's like this: ```Get-WmiObject win32_logicaldisk -ComputerName $ComputerName | Where-Object DriveType -eq 3```
+1. Modify the next line so it's like this:
+1. ```Get-WmiObject win32_logicaldisk -ComputerName $ComputerName | Where-Object DriveType -eq 3```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
 1. Unload the module from memory using this command: ```Remove-Module MyFirstModule```
 1. Now run the new function: ```Get-DiskSpace -ComputerName LON-DC1```
@@ -84,7 +91,6 @@ Function Get-DiskSpace {
 
 ## Adapt the function to work with local and remote computers
 1. Return to the ISE and change the param line so it looks like this: ```param($ComputerName=$env:COMPUTERNAME)```
-1. Change the Get-WmiObject line so it's like this ```Get-WmiObject win32_logicaldisk -ComputerName $ComputerName | Where-Object DriveType -eq 3```
 1. You specified a default value if the function is called without a computername. In that case the local computername is used.
 1. Save the file, and minimize the ISE to return to the PowerShell console.
 1. Unload the module from memory using this command: ```Remove-Module MyFirstModule```
@@ -129,7 +135,8 @@ This command retrieves disk info from the LON-DC1 computer.
 
 
 ## Adapt the function to include verbose output using CmdletBinding
-1. Return to the ISE and change the param line so it looks like this: ```[cmdletbinding()]param($ComputerName=$env:COMPUTERNAME)```
+1. Return to the ISE and change the param line so it looks like this:
+1. ```[cmdletbinding()]param([string[]]$ComputerName=$env:COMPUTERNAME)```
 1. Insert a new line between foreach and Get-WmiObject and insert this line: ```Write-Verbose "Connecting to $pc"```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
 1. Unload the module from memory using this command: ```Remove-Module MyFirstModule```
@@ -137,3 +144,31 @@ This command retrieves disk info from the LON-DC1 computer.
 1. If everything is correct, the function retrieves disk info from the local computer, including verbose output.
 1. Run the function with multiple computernames: ```Get-DiskSpace -ComputerName LON-DC1, LON-CL1 -Verbose```
 1. If everything is correct, the function retrieves disk info from multiple computers, including verbose output.
+
+## Finished module
+Your module should now look like this:
+```
+function motd { 'Old programmers never die... They just decompile.' }
+
+Function Get-DiskSpace {
+    <#
+    .SYNOPSIS
+    This command displays disk space on local and remote computers.
+
+    .DESCRIPTION
+    This command uses WMI to list disk size and capacity on local and remote computers.
+
+    .EXAMPLE
+    Get-DiskSpace -ComputerName LON-DC1
+    This command retrieves disk info from the LON-DC1 computer.
+    #>
+
+    [cmdletbinding()]param($ComputerName=$env:COMPUTERNAME)
+
+    foreach($pc in $ComputerName) {
+        Write-Verbose "Connecting to $pc"
+        Get-WmiObject win32_logicaldisk -ComputerName $pc | Where-Object DriveType -eq 3
+    }
+}
+
+```
