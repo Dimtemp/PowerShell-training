@@ -23,8 +23,8 @@
 1. Run this command to list all completed jobs: ```Get-Job -State Completed```
 1. Run this command to remove all completed jobs: ```Get-Job -State Completed | Remove-Job```
 1. Run this command to list all running jobs: ```Get-Job -State Running```
-1. Run this command to remove all running jobs: ```Get-Job -State Running | Remove-Job```
-1. Warning: the running jobs will be aborted.
+1. Run this command to remove all running jobs: ```Get-Job -State Running | Remove-Job -Force```
+1. Beware that all running jobs will be aborted. Make sure you run this command on the lab computer.
 1. Close the PowerShell console.
 
 
