@@ -1,6 +1,8 @@
 # Filtering with and without Where-Object
 In this chapter we're going to filter our output. This is normally done using operators. Some of them you already know: < > =.
 
+Note: as with most PowerShell exercises, it's best not to copy-paste the command's, but to actually type them. Use keyboard navigation (arrow up/down, home, end) to speed up entering commands in PowerShell.
+
 ## Task 1: basic filtering
 1. Run this command: ```Get-Help operators```
 1. PowerShell has several helpfiles covering the use of operators.
