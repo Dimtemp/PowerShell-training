@@ -1,4 +1,4 @@
-# Modules
+# PowerShell Modules
 
 ## Your first Function
 In this chapter we're going to create a PowerShell module.
@@ -112,9 +112,11 @@ foreach($pc in $computerName) {
 ```
 <#
 .SYNOPSIS
-This command displays disks space on local and remote computers.
+This command displays disk space on local and remote computers.
+
 .DESCRIPTION
-With this command you can generate listing of disk size and capacity on a local computer and remote computers. It uses WMI to access the remote computer.
+This command uses WMI to list disk size and capacity on local and remote computers.
+
 .EXAMPLE
 Get-DiskSpace -ComputerName LON-DC1
 This command retrieves disk info from the LON-DC1 computer.
