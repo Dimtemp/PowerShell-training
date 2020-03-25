@@ -1,5 +1,7 @@
 # PowerShell pipeline basics
 
+Note: as with most PowerShell exercises, it's best not to copy-paste the command's, but to actually type them. Use keyboard navigation (arrow up/down, home, end) to speed up entering commands in PowerShell.
+
 ## Task 1: Measuring
 1. Open a PowerShell console.
 1. Run this command: ```Get-Command```
