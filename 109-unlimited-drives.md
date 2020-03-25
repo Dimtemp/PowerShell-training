@@ -44,8 +44,9 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Inspect with ```Get-ChildItem Programs:\```
 1. Since drives are not limited anymore to one driveletter, the number of drives is virtually endless. There's one catch: drives you create here are not presented in Windows and/or Windows Explorer, unless you make the persistent.
 1. This is the only way to make drives visible in Windows, which are actually ordinary drive mappings to network shares:
-1. ```New-PSDrive –Name S –Root '\\LON-DC1\SYSVOL' –PSProvider FileSystem -Persist```
+1. ```New-PSDrive –Name T –Root '\\LON-DC1\SYSVOL' –PSProvider FileSystem -Persist```
 1. Notice the Persist parameter, to make the mapping show up in Windows Explorer, and survive reboots.
+1. Verify the drive mapping in Windows Explorer.
 
 
 ## Task: certificate store
