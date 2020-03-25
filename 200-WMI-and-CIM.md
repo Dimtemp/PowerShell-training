@@ -1,6 +1,6 @@
 # WMI and CIM
 
-**Before performing this exercise you need to have a Windows computer, and have learned how to work with Get-Member and variables.
+**Before performing this exercise you need to have a Windows computer, and have learned how to work with Get-Member and variables.**
 
 WMI stands for Windows Management Instrumenation. So it's an **instrument**, for the **management** of **Windows** computers. It's also meant to manage the largest computer networks.
 
