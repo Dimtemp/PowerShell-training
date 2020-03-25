@@ -26,16 +26,18 @@ WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That
 1. This displays all services.
 1. Run this command: ```Get-WmiObject –Class Win32_Service -Filter "Name LIKE 'Sp%'"```
 1. Pay special attention to the spelling and punctuation. Also notice the alternative filter. You might expect **Name -LIKE Sp*,** but instead we use **Name LIKE 'Sp%'**. This is because this is a WMI filter, which has it's own language: WMI Query Language (WQL).
-1. Remember the PowerShell saying "Filter left, Format right"? Now we're filtering at the source.
+1. Remember the PowerShell saying "Filter left, Format right"? Now we're filtering at the source (left).
 
 
 ## Task 3: WMI Methods
 1. Run this command to list a specific service: ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'"```
 1. Notice the StartMode: which should be auto.
-1. Run this command to change the startmode: ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'" | Invoke-WmiMethod –Name ChangeStartMode –Argument 'Manual'```
+1. Run this command to change the startmode:
+1. ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'" | Invoke-WmiMethod –Name ChangeStartMode –Argument 'Manual'```
 1. Inspect the service in several ways: ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'"```
 1. Or like this: ```Get-Service Spooler```
-1. Now return the service to the automatic start mode using Set-Service: ```Set-Service Spooler -StartupType Automatic```
+1. Now return the service to the automatic start mode:
+1. ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'" | Invoke-WmiMethod –Name ChangeStartMode –Argument 'Automatic'```
 
 
 ## Task 4: CIM sessions
