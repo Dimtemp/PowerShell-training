@@ -97,4 +97,4 @@ There are basically three solutions in case a command does not accept, or cannot
 ### Using Foreach-Object
 1. ```Get-ADComputer –Filter * | Foreach-Object { Test-Connection -Computername $_.Name }```
 ### Using parenthesis
-1. ```Test-Connection –Computername (Get-ADComputer –Filter * | Select-Object –ExpandProperty Name)```
+1. ```Test-Connection –Computername (Get-ADComputer –Filter *).Name```
