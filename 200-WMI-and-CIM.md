@@ -24,9 +24,9 @@ WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That
 ## Task 2: Filtering WMI Objects
 1. Run this command: ```Get-WmiObject –Class Win32_Service```
 1. This displays all services.
-1. Run this command: ```Get-WmiObject –Class Win32_Service -Filter "Name LIKE 'Sp%'"
-1. Remember the PowerShell saying "Filter left, Format right"? Now we're filterin at the source.
-1. Pay special attention to the spelling and punctuation. Als notice the alternative filter. You might expect Name -LIKE Sp*, but instead we use Name LIKE 'Sp%'. This is because this is a WMI filter, which has it's own language: WMI Query Language (WQL).
+1. Run this command: ```Get-WmiObject –Class Win32_Service -Filter "Name LIKE 'Sp%'"```
+1. Pay special attention to the spelling and punctuation. Also notice the alternative filter. You might expect **Name -LIKE Sp*,** but instead we use **Name LIKE 'Sp%'**. This is because this is a WMI filter, which has it's own language: WMI Query Language (WQL).
+1. Remember the PowerShell saying "Filter left, Format right"? Now we're filtering at the source.
 
 
 ## Task 3: WMI Methods
