@@ -1,6 +1,8 @@
 # Windows Server Management
 
-## Working with the eventlog
+Most commands in this section only work on Windows servers. Make sure you're logged on to the LON-DC1, or LON-SVR1 virtual machine.
+
+## Task 1: Working with the Windows eventlog
 1. Run this command to list all event logs: ```Get-Eventlog -List```
 1. Run this command to view the System log: ```Get-Eventlog -LogName system```
 1. Run this command to view the latest 20 messages from the System log:
@@ -13,8 +15,12 @@
 1. ```Write-EventLog -LogName Tooling -Source Source1 -EntryType Information -Message 'startup' -EventId 1000```
 
 
-## Software installation
-1. This command only works on Windows servers. Make sure you're logged on to the LON-DC1, or LON-SVR1 virtual machine
+## Task 2: Basic networking
+1. ```Test-Connection LON-DC1, LON-SVR1```
+1. ```Get-NetIPConfiguration```
+
+
+## Task 3: Software installation
 1. Run this command to list all available features: ```Get-WindowsFeature```
 1. Run this command to list features with the name telnet: ```Get-WindowsFeature *telnet*```
 1. Run this command to install the telnet client software: ```Install-WindowsFeature Telnet-Client```
@@ -22,9 +28,16 @@
 1. Verify the installation of telnet: ```Get-WindowsFeature Telnet-Client```
 
 
-## Disk Management
+## Task 4: Install a web server
+1. ```Install-WindowsFeature Web-Server```
+1. ```mkdir c:\MyWebsite```
+1. ```New-WebSite PowerShellSchool -PhysicalPath C:\MyWebsite```
+
+
+## Task 5: Disk Management
 1. Run this command to list all disks: ```Get-Disk```
 1. Run this command to list all volumes: ```Get-Volume```
+1. Run this command to manager Hyper-V and virtual disks: ```Install-WindowsFeature Hyper-V-PowerShell```
 1. Run this command to create a new folder: ```mkdir C:\VHD
 1. Run this command to create a new virtual disk (VHD):
 1. ```New-VHD -Path C:\VHD\Disk1.vhd -SizeBytes 8GB -Dynamic```
@@ -43,15 +56,4 @@
 1. ```New-VHD -Path C:\VHD\Disk2.VHD -SizeBytes 8GB -Dynamic | Mount-VHD -Passthru | Initialize-Disk -Passthru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume```
 1. You don't need to specifiy disks or partitions because we rely on the pipeline to pass the new object information. Some command's don't pass information by default. That's what the Passthru parameter is for.
 
-
-## Basic networking
-1. Make sure you're connected to LON-SVR1
-1. ```Test-Connection LON-DC1```
-1. ```Get-NetIPConfiguration```
-
-
-## Install a web server
-1. ```Install-WindowsFeature Web-Server```
-1. ```mkdir c:\MyWebsite```
-1. ```New-WebSite PowerShellSchool -PhysicalPath C:\MyWebsite```
 
