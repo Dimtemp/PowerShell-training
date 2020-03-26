@@ -1,9 +1,10 @@
 # Windows Server Management
 
-Most commands in this section only work on Windows servers. Make sure you're logged on to the LON-DC1, or LON-SVR1 virtual machine.
+#### Most commands in this section only work on Windows servers. Make sure you're logged on to the LON-DC1, or LON-SVR1 virtual machine.
 
 ## Task 1: Working with the Windows eventlog
 1. Run this command to list all event logs: ```Get-Eventlog -List```
+1. Notice the System Log.
 1. Run this command to view the System log: ```Get-Eventlog -LogName system```
 1. Run this command to view the latest 20 messages from the System log:
 1. ```Get-Eventlog -LogName system -Newest 20```
@@ -23,8 +24,9 @@ Most commands in this section only work on Windows servers. Make sure you're log
 ## Task 3: Software installation
 1. Run this command to list all available features: ```Get-WindowsFeature```
 1. Run this command to list features with the name telnet: ```Get-WindowsFeature *telnet*```
+1. Notice the Name Column. We need these exact names for installation.
 1. Run this command to install the telnet client software: ```Install-WindowsFeature Telnet-Client```
-1. Notice the outcome.
+1. Notice the Success and Restart Needed columns.
 1. Verify the installation of telnet: ```Get-WindowsFeature Telnet-Client```
 
 
