@@ -52,6 +52,8 @@ Modules are primarily stored in folders that are part of a search path. This way
 1. In Notepad create a function:
 1. ```Function motd { 'Old programmers never die... They just decompile.' }```
 1. Save the file, close Notepad, and return to the PowerShell console.
+1. Make sure to set the execution policy to unrestricted: ```Set-ExecutionPolicy Unrestricted```
+1. Also, the previous command can only be run when you are running PowerShell elevated (as Administrator).
 1. Run the function: ```motd```
 1. This should display **Old programmers never die... They just decompile.** on the screen.
 1. Run this command: ```Get-Command motd```
