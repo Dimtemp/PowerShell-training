@@ -1,6 +1,6 @@
 # PowerShell Modules
 
-#### Note: you can find the finished module at the end of this exercise. If things don't work out as you wanted to, you can take take a look over there.
+#### Note: you can find the finished module at the end of this exercise. If things don't work out as you wanted to, you can take a look over there.
 
 ## Task 1: Your first Function
 In this chapter we're going to create a PowerShell module.
