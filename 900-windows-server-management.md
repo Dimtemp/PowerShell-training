@@ -27,20 +27,20 @@
 1. Run this command to list all volumes: ```Get-Volume```
 1. Run this command to create a new folder: ```mkdir C:\VHD
 1. Run this command to create a new virtual disk (VHD):
-1. ```New-VHD -Path C:\VHD\Disk1.vhd -SizeBytes 8GB -Dynamic
-1. Mount the new VHD: ```Mount-VHD C:\VHD\Disk1.VHD -Passthru
+1. ```New-VHD -Path C:\VHD\Disk1.vhd -SizeBytes 8GB -Dynamic```
+1. Mount the new VHD: ```Mount-VHD C:\VHD\Disk1.VHD -Passthru```
 1. Notice the Number on the bottom, probably a 1.
 1. Initialize the disk. Replace the 9 with the number you found in the previous step:
-1. ```Initialize-Disk -Number 9 -Passthru
+1. ```Initialize-Disk -Number 9 -Passthru```
 1. Create a new partition on the disk. Replace the 9 with the number you found previously:
-1. ```New-Partition -DiskNumber 9 -UseMaximumSize -AssignDriveLetter
+1. ```New-Partition -DiskNumber 9 -UseMaximumSize -AssignDriveLetter```
 1. A "Format disk" popup might appear. Click Cancel.
 1. Notice the driveletter in the output. Also notice that OperationalStatus is still Unknown.
-1. Format the volume with NTFS using this command: ```Format-Volume -DriveLetter D:
+1. Format the volume with NTFS using this command: ```Format-Volume -DriveLetter D:```
 1. Open the Windows Explorer with this command: ```Explorer.exe```
 1. Verify the new drive you just created.
 1. To create a new virtual disk, initialize it, create a partition and format it, use this command:
-1. ```New-VHD -Path C:\VHD\Disk2.VHD -SizeBytes 8GB -Dynamic | Mount-VHD -Passthru | Initialize-Disk -Passthru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume
+1. ```New-VHD -Path C:\VHD\Disk2.VHD -SizeBytes 8GB -Dynamic | Mount-VHD -Passthru | Initialize-Disk -Passthru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume```
 1. You don't need to specifiy disks or partitions because we rely on the pipeline to pass the new object information. Some command's don't pass information by default. That's what the Passthru parameter is for.
 
 
