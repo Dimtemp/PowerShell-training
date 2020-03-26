@@ -49,7 +49,7 @@ PowerShell has an extremely **PowerFull** pattern matching mechanism: regular ex
 Only **Sick** results in false, because the **S** is not part of the **DMNR** collection.
 
 
-## Task: filtering at the source
+## Task 4: filtering at the source
 The Where-Object has a major advantage: all PowerShell output can be filtered. It also has a huge disadvantage: all output will be filtered locally, by PowerShell. Some commands allow to filter at the source. This can prevent huge data transfers across the network, or can help speed up processing.
 1. ```Get-Process -Name *sys*```
 1. This command filters all processes with **sys** in it's name. This filter is executed at the source.
