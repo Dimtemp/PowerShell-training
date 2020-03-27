@@ -44,6 +44,6 @@
 1. ```New-Partition -DiskNumber 1 -UseMaximumSize -AssignDriveLetter```
 1. A "Format disk" popup might appear. Click Cancel.
 1. Notice the driveletter in the output. Also notice that OperationalStatus is still Unknown.
-1. Format the volume with NTFS using this command (replace the Z: with the new letter): ```Format-Volume -DriveLetter Z:```
+1. Format the volume with NTFS using this command (replace the Z: with the new letter): ```Format-Volume -DriveLetter Z```
 1. Open the Windows Explorer with this command: ```Explorer.exe```
 1. Verify the new drive you just created.
