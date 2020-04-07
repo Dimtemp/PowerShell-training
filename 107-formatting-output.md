@@ -81,3 +81,7 @@ The first character starts at 0. This command displays the first two characters:
 1. Should return false.
 1. Run this command: ```'Greetings'.PadLeft(15)```
 1. The left of the output is padded with spaces so the total length will be 15.
+
+
+## Filter left, format right
+Remember the PowerShell paradigm from the previous lesson? **Filter left, format right.** Filter output as soon as possible. And format output at the last possible moment. As soon data has been formatted for output, you're likely losing context or metadata. It's harder to reprocess the data after that. So make sure the output is meant for human readability, and nothing more.
