@@ -1,4 +1,4 @@
-# Working with date and time
+# Going on a date
 
 ## Task 1: using Get-Date
 1. Run this command to display the current date and time: ```Get-Date```
