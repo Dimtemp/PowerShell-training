@@ -1,4 +1,4 @@
-# PowerShell Modules
+# Divide and conquer with functions and modules
 
 #### Note: you can find the finished module at the end of this exercise. If things don't work out as you wanted to, you can take a look over there.
 
