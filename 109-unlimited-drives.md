@@ -1,6 +1,8 @@
 # Unlimited drives (no joke!)
 In this chapter we're going to work with the filesystem and other 'providers'. Make sure you perform this procedure on a computer where you have write permissions, and where you can break a leg.
 
+It's assumed you have performed the datetime exercise before beginning with this module.
+
 ## Task: PowerShell drives
 PowerShell has mapped many databases and repositories (also called providers) to drives. This helps us in navigating and manipulating these providers with a uniform toolset.
 1. Run this command: ```Get-PSDrive```
