@@ -33,7 +33,7 @@ Note: as with most PowerShell exercises, it's best not to copy-paste the command
 1. ```Get-Process | Where-Object name -LIKE *s```
 
 
-## Task 3: match them
+## Task 3: match that
 PowerShell has an extremely **PowerFull** pattern matching mechanism: regular expressions. Originating not earlier than **1951**, it's a wonderfull way to describe patterns in input and output.
 1. Run this command to list all processes that have **sh** in their names: ```Get-Process | Where-Object ProcessName -match sh```
 1. Notice that we're not using any wildcards, like * or ?.
