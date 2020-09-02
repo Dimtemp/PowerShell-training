@@ -45,12 +45,13 @@ In OOP-programming, objects can have properties and methods. Methods can be seen
 
 ## Task 4: Killing a process using a method
 1. Retrieve a list of processes with the name **mspaint** by entering this command: ```Get-Process mspaint```
-1. Make sure there is only one mspaint process. The process you started before. If there are more mspaint processes, try to close them.
+1. Make sure there is only one mspaint process: the process you started before. If there are more mspaint processes, try to close them until there is one left.
 1. **Do not continue beyond this point if there is not just 1 mspaint process.**
 1. Run this command to retrieve extra information on the mspaint processes in general: ```Get-Process mspaint | Get-Member```
 1. Find the **methods** in the **MemberType** column.
-1. Make sure the is a **Kill** method. The kill method stops a process. We will stop our mspaint process.
+1. Make sure the is a **Kill** method. The kill method stops a process. We will stop our single mspaint process.
 1. Assuming you have one mspaint process running, run this command: ```(Get-Process mspaint).Kill()```
+1. In the previous command you enclose the ```Get-Process mspaint``` command in parentheses to help PowerShell distinguish the object from the method. Imagine this command: ```Get-Process mspaint.Kill()```. If you would run the previous command, it would result in an error message. With the first set of parentheses we help PowerShell in distinguishing between the object **(Get-Process mspaint)** and the method **Kill**.
 
 
 ## Task x: Diving into datetime objects
