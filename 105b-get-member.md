@@ -21,8 +21,7 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Run this command to convert the string to upper case: ```'hello, world'.ToUpper()```
 1. Run this command to replace the word **world** with **dear**: ```'hello, world'.Replace('world', 'dear')```
 1. Run this command to display a part of the string: ```'hello, world'.Substring(7,5)```
-1. Using this command you can determine what parameters are accepted by the Substring method: ```'hello, world'.Substring```
-1. Notice the **lack** of parentheses **()** at the end of the mehod name.
+1. Using this command you can determine what parameters are accepted by the **Substring** method: ```'hello, world'.Substring``` Notice the **lack** of parentheses **()** at the end of the mehod name.
 1. The output should tell you that Substring can accept two parameters: **startIndex** and **length**, and that both are of type **int** (integer).
 
 ## Task x: Diving into processes
