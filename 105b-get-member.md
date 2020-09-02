@@ -38,6 +38,8 @@ In OOP-programming, objects can have properties and methods. Methods can be seen
 1. Scroll up to the start of the output. It should display **TypeName: System.Diagnostics.Process**. This is the **type of object** that was the input for Get-Member.
 1. Investigate the list and focus on the **MemberType** column. It should display different types: **AliasProperty, Method** and **Property** are the most popular ones.
 1. Some properties were already in the output of **Get-Process**. You should be able to find **Id** and **ProcessName** as properties.
+1. Some properties were not in the output, but are part of the object. PowerShell might decide not to show those properties to keep the output simple. Notice the **Path** and **Company** properties.
+1. Use Select-Object to display proerties that were hidden: ```Get-Process | Select-Object ProcessName, Company, Path```
 1. Some properties have been aliased. For example, **NPM** is an alias for **NonpagedSystemMemorySize64**. You can imagine that the process listing would be very wide if some original property names are being used. This can be a reason to alias a property to a shorter name.
 
 
