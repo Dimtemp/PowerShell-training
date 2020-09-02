@@ -7,8 +7,7 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Also notice we don't use a CmdLet or Function (like **Write-Host** or **echo**) to display the output on the screen.
 1. Run this command to investigate the output: ```'hello, world' | Get-Member```
 1. This displays information on **string objects** in general.
-1. Scroll up to the start of the output. It should display **TypeName: System.String**
-1. This is the **type of object** that was the input for Get-Member.
+1. Scroll up to the start of the output. It should display **TypeName: System.String**. This is the **type of object** that was the input for Get-Member.
 1. Investigate the list and focus on the **MemberType** column. It should display many times **Method** and on the bottom one **Property**.
 1. Run this command to display the length of the string: ```'hello, world'.Length```
 1. It should display 12 as the length of the string.
