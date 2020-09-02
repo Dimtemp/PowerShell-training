@@ -8,7 +8,7 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Run this command to investigate the output: ```'hello, world' | Get-Member```
 1. This displays information on **string objects** in general.
 1. Scroll up to the start of the output. It should display **TypeName: System.String**. This is the **type of object** that was the input for Get-Member.
-1. Investigate the list and focus on the **MemberType** column. It should display many times **Method** and on the bottom one **Property**.
+1. Investigate the list and focus on the **MemberType** column. It should display **Method** many times, and on the bottom just one **Property**.
 1. Run this command to display the length of the string: ```'hello, world'.Length```
 1. It should display 12 as the length of the string.
 1. Run this command to split the string on whitespace: ```'hello, world'.Split()```
