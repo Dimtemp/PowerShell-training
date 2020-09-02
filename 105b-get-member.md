@@ -1,11 +1,34 @@
 # Diving deeper with Get-Member
+In this chapter we're going to investigate objects and their output. The Get-Member command will help us with that. Notice that Get-Member is a command that can help us to determine object or output specifics, it's hardly ever used in a script. In other words: use Get-Member to investigate and learn how things works. Optionally apply what you've learned in a script.
+
+## Task 1: Diving into string objects
+1. Enter this command to display a simple message: ```'hello, world'```
+1. Please notice we use **single quotation marks** to specify we're creating a **string object**.
+1. Also notice we don't use a CmdLet or Function (like **Write-Host** or **echo**) to display the output on the screen.
+1. Run this command to investigate the output: ```'hello, world' | Get-Member```
+1. This displays information on **string objects** in general.
+1. Scroll up to the start of the output. It should display **TypeName: System.String**
+1. This is the **type of object** that was the input for Get-Member.
+1. Investigate the list and focus on the **MemberType** column. It should display many times **Method** and on the bottom one **Property**.
+1. Run this command to display the length of the string: ```'hello, world'.Length```
+1. It should display 12 as the length of the string.
+1. Run this command to split the string on whitespace: ```'hello, world'.Split()```
+1. It should display both words on two different lines.
+1. Run this command to split the string on a dash: ```'31-12-2020'.Split('-')```
+1. It should display the numbers 30, 12, and 2020 on three different lines.
+1. Run this command to convert the string to upper case: ```'hello, world'.ToUpper()```
+1. Run this command to replace the word **world** with **dear**: ```'hello, world'.Replace('world', 'dear')```
+1. Run this command to display a part of the string: ```'hello, world'.Substring(7,5)```
+1. Using this command you can determine what parameters are accepted by the Substring method: ```'hello, world'.Substring```
+1. Notice the **lack** of parentheses **()** at the end of the mehod name.
+1. The output should tell you that Substring can accept two parameters: **startIndex** and **length**, and that both are of type **int** (integer).
 
 ## Task x: Diving into processes
 1. Start a new application in the PowerShell window by typing this command: ```mspaint.exe```
 1. Retrieve a list of processes with the name **mspaint** by entering this command: ```Get-Process mspaint```
 1. The output should display information on one or more mspaint processes. It displays the **ProcessName, ID, Handles, NPM,** etc...
 1. Run this command to retrieve extra information on the mspaint processes in general: ```Get-Process mspaint | Get-Member```
-1. This displays information on processes in general.
+1. This displays information on **process objects** in general.
 1. Scroll up to the start of the output. It should display **TypeName: System.Diagnostics.Process**
 1. This is the **type of object** that was the input for Get-Member.
 1. Investigate the list and focus on the **MemberType** column. It should display different types: **AliasProperty, Method** and **Property** are the most popular ones.
@@ -15,21 +38,32 @@
 
 ## Task x: Using methods
 1. Retrieve a list of processes with the name **mspaint** by entering this command: ```Get-Process mspaint```
-1. Assuming you still have one mspaint process running, run this command: ```Get-Process mspaint | ```
-
 1. Make sure there is only one mspaint process. The process you started before. If there are more mspaint processes, try to close them.
-1. **Do not continue beyond this point of there is not just 1 mspaint process.**
-$proc.kill()
+1. **Do not continue beyond this point if there is not just 1 mspaint process.**
+1. Run this command to retrieve extra information on the mspaint processes in general: ```Get-Process mspaint | Get-Member```
+1. Find the **methods** in the **MemberType** column.
+1. Make sure the is a **Kill** method. The kill method stops a process. We will stop our mspaint process.
+1. Assuming you have one mspaint process running, run this command: ```(Get-Process mspaint).Kill()```
 
 
 ## Task x: Diving into datetime objects
-datetime
-
-## Task 1: Diving into string objects 
-
-string
-
-
-
+1. $CurrentDate = Get-Date
+1. $CurrentDate | Get-Member
+1. $CurrentDate.DayOfWeek
+1. $CurrentDate.Month
+1. $CurrentDate.AddDays(28)
+1. Verify in your calendar that the result of the last command is correct.
 
 
+## Task x: using variables
+$MyProc = get-process mspaint
+$MyProc
+$MyProc.Id
+$MyProc.Path
+$MyProc.kill()
+$CurrentDate = Get-Date
+$CurrentDate | Get-Member
+$CurrentDate.DayOfWeek
+$CurrentDate.Month
+$CurrentDate.AddDays(28)
+Verify in your calendar that the result of the last command is correct.
