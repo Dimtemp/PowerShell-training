@@ -12,8 +12,10 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Run this command to display the length of the string: ```'hello, world'.Length```
 1. It should display 12 as the length of the string.
 1. OOPS! :see_no_evil: This is our first formal encounter with Object-Oriented Programming (OOP). Please notice the dot (.) character. It's the separation between the object on the left, and it's properties and methods on the right. This is a very common notation in other programming languages also, like C, Java, and Python. You will see this notation a lot in PowerShell, also.
+1. This OOP-notation: 'hello, world'.Length, means we want to **view** the **Length** property of the string object.
 1. Run this command to split the string on whitespace: ```'hello, world'.Split()```
 1. It should display both words on two different lines.
+1. This OOP-notation: 'hello, world'.Split(), means we want to **execute** the **Split** method of the string object.
 1. Run this command to split the string on a dash: ```'31-12-2020'.Split('-')```
 1. It should display the numbers 30, 12, and 2020 on three different lines.
 1. Run this command to convert the string to upper case: ```'hello, world'.ToUpper()```
@@ -56,14 +58,14 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 
 
 ## Task x: using variables
-$MyProc = get-process mspaint
-$MyProc
-$MyProc.Id
-$MyProc.Path
-$MyProc.kill()
-$CurrentDate = Get-Date
-$CurrentDate | Get-Member
-$CurrentDate.DayOfWeek
-$CurrentDate.Month
-$CurrentDate.AddDays(28)
-Verify in your calendar that the result of the last command is correct.
+1. $MyProc = get-process mspaint
+1. $MyProc
+1. $MyProc.Id
+1. $MyProc.Path
+1. $MyProc.kill()
+1. $CurrentDate = Get-Date
+1. $CurrentDate | Get-Member
+1. $CurrentDate.DayOfWeek
+1. $CurrentDate.Month
+1. $CurrentDate.AddDays(28)
+1. Verify in your calendar that the result of the last command is correct.
