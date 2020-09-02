@@ -1,5 +1,5 @@
 # Diving deeper with Get-Member
-In this chapter we're going to investigate objects and their output. The Get-Member command will help us with that. Notice that Get-Member is a command that can help us to determine object or output specifics, it's hardly ever used in a script. In other words: use Get-Member to investigate and learn how things works. Optionally apply what you've learned in a script.
+In this chapter we're going to investigate objects and their output. The Get-Member command will help us with that. Notice that while Get-Member is a command that can help us to determine object or output specifics, it's hardly ever used in a script. In other words: use Get-Member to investigate and learn how things works. After that, you can apply what you've learned in a script.
 
 ## Task 1: Diving into string objects
 1. Enter this command to display a simple message: ```'hello, world'```
