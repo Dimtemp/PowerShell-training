@@ -11,6 +11,7 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Investigate the list and focus on the **MemberType** column. It should display **Method** many times, and on the bottom just one **Property**.
 1. Run this command to display the length of the string: ```'hello, world'.Length```
 1. It should display 12 as the length of the string.
+1. OOPS! :see_no_evil: This is our first formal encounter with Object-Oriented Programming (OOP). Please notice the dot (.) character. It's the separation between the object on the left, and it's properties and methods on the right. This is a very common notation in other programming languages also, like C, Java, and Python. You will see this notation a lot in PowerShell, also.
 1. Run this command to split the string on whitespace: ```'hello, world'.Split()```
 1. It should display both words on two different lines.
 1. Run this command to split the string on a dash: ```'31-12-2020'.Split('-')```
