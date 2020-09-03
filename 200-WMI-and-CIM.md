@@ -18,7 +18,14 @@ WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That
 1. This command lists all possible WMI classes we can query. The previous three are part of the (huge) list.
 1. Run this command: ```Get-WmiObject –List –Class *disk*```
 1. This command lists all possible WMI classes that cover disks.
-1. Run this command: ```Get-WmiObject Win32_LogicalDisk```
+1. Run this command to display local disk info: ```Get-WmiObject Win32_LogicalDisk```
+1. Inspect hidden properties: ```Get-WmiObject Win32_LogicalDisk | Get-Member```
+1. Create an overview of disks using the following command:
+1.  ```Get-WmiObject -class Win32_LogicalDisk | Select-Object PSComputerName, Name, Compressed, Description, FileSystem, @{Name='FreeSpace(G)'; Expression={[int]($_.FreeSpace/1GB)}}, @{Name='Size(G)'; Expression={[int]($_.Size/1GB)}}```
+1. Now export the results to HTML:
+1.  ```Get-WmiObject -class Win32_LogicalDisk | Select-Object PSComputerName, Name, Compressed, Description, FileSystem, @{Name='FreeSpace(G)'; Expression={[int]($_.FreeSpace/1GB)}}, @{Name='Size(G)'; Expression={[int]($_.Size/1GB)}} | ConvertTo-Html -PreContent 'Disk space report' -PostContent (Get-Date) | Out-File $HOME\diskreport.htm```
+1. Open the report in your webbrowser using this command: ```Invoke-Item $HOME\diskreport.htm```
+1. Many PowerShell commands support a ComputerName parameter. Get-WmiObject has. You might change the previous command, including the PSComputerName paramter as part of the Get-WmiObject command to report on disk space from many computers in the network.
 
 
 ## Task 2: Filtering WMI Objects
@@ -32,19 +39,20 @@ WMI was introduced in **Windows 95**. That was in 1995. So a long time ago. That
 
 
 ## Task 3: WMI Methods
+For this task you need to run PowerShell elevated. Right click the PowerShell icon, and click **Run as Administrator**. If you're not able to run PowerShell elevated, just skip task 3.
 1. Run this command to list a specific service: ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'"```
 1. Notice the StartMode: which should be auto.
 1. Run this command to change the startmode:
 1. ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'" | Invoke-WmiMethod –Name ChangeStartMode –Argument 'Manual'```
-1. Inspect the service in several ways: ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'"```
-1. Or like this: ```Get-Service Spooler```
+1. Pay special attention to the ReturnValue: it should be 0. If it's not, you might be running PowerShell non-elevated. Pay close attention to the instructions at the beginning of task 3 to run PowerShell elevated.
+1. You can inspect the service in several ways: ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'"```
+1. Or like this: ```Get-Service Spooler | Select-Object Name, StartType```
 1. Now return the service to the automatic start mode:
 1. ```Get-WmiObject –Class Win32_Service –Filter "Name='Spooler'" | Invoke-WmiMethod –Name ChangeStartMode –Argument 'Automatic'```
 
 
 ## Task 4: CIM sessions
 CIM stands for Common Information Model. It's an open standard that defines how managed elements in an IT environment are represented (source: Wikipedia). It has many of the same goals as WMI, but it's implementation in PowerShell is more modern.
-
 1. Run this command to open a session to a remote computer: ```$s = New-CimSession –ComputerName LON-DC1```
 1. Run this command to query WMI information through the session: ```Get-CimInstance –ClassName Win32_OperatingSystem –CimSession $s```
 1. Run this command to close the session: ```$s | Remove-CimSession```
