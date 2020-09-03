@@ -15,10 +15,22 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. This OOP-notation: 'hello, world'.Length, means we want to **view** the **Length** property of the string object.
 
 
-## Task 2: Methods
-In OOP-programming, objects can have properties and methods. Methods can be seen as macros from a Word document. Macros execute functions within a document. Methods can be explained as mini-programs, executing on the objects data.
+## Task 2: diving into services
+1. Run this command to get a listing of services: ```Get-Service```
+1. Notice it displays only three properties: Status, Name, and DisplayName.
+1. Run this command to inspect service objects: ```Get-Service | Get-Member```
+1. Notice there are several hidden properties that are very interesting, like RequiredServices and StartType.
+1. Run this command to display all services with their StartType: ```Get-Service | Select-Object Status, StartType, DisplayName
+1. Sort the output on StartType: ```Get-Service | Select-Object Status, StartType, DisplayName | Sort-Object StartType```
+1. Notice the **Disabled** services on the bottom: their **Status** should show **Stopped**.
+1. Also notice that most services that are set to **Automatic** should be running. Some might not. And notice that many services that are set to **Manual** are not running, but some might be running. This is expected behavior.
+
+
+## Task 3: Methods
+:point_up: In OOP-programming, objects can have properties and methods. Methods can be seen as macros from a Word document. Macros execute functions within a document. Methods can be explained as mini-programs, executing on the objects data.
 1. Run this command to split the string on whitespace: ```'hello, world'.Split()```
 1. It should display both words on two different lines.
+1. :point_up: Split is the name of the method. We use parentheses at the end so we can optionally pass parameters. If we don't pass any parameters, the parentheses are **still required**. It's a bit awkward, but by using parentheses, even empty ones, we can see that a **method is executed**, instead of a **property being investigated**.
 1. This OOP-notation: 'hello, world'.Split(), means we want to **execute** the **Split** method of the string object.
 1. Run this command to split the string on a dash: ```'31-12-2020'.Split('-')```
 1. It should display the numbers 30, 12, and 2020 on three different lines.
@@ -29,7 +41,7 @@ In OOP-programming, objects can have properties and methods. Methods can be seen
 1. The output should tell you that Substring can accept two parameters: **startIndex** and **length**, and that both are of type **int** (integer).
 
 
-## Task 3: Diving into processes
+## Task 4: Diving into processes
 1. Start a new application in the PowerShell window by typing this command: ```mspaint```
 1. Retrieve a list of processes with the name **mspaint** by entering this command: ```Get-Process mspaint```
 1. The output should display information on one or more mspaint processes. It displays **Handles, NPM, ID, ProcessName** and several other properties.
@@ -38,40 +50,20 @@ In OOP-programming, objects can have properties and methods. Methods can be seen
 1. Scroll up to the start of the output. It should display **TypeName: System.Diagnostics.Process**. This is the **type of object** that was the input for Get-Member.
 1. Investigate the list and focus on the **MemberType** column. It should display different types: **AliasProperty, Method** and **Property** are the most popular ones.
 1. Some properties were already in the output of **Get-Process**. You should be able to find **Id** and **ProcessName** as properties.
-1. Some properties were not in the output, but are part of the object. PowerShell might decide not to show those properties to keep the output simple. Notice the **Path** and **Company** properties.
-1. Use Select-Object to display proerties that were hidden: ```Get-Process | Select-Object ProcessName, Company, Path```
 1. Some properties have been aliased. For example, **NPM** is an alias for **NonpagedSystemMemorySize64**. You can imagine that the process listing would be very wide if some original property names are being used. This can be a reason to alias a property to a shorter name.
+1. Some properties were not in the output, but are part of the object. PowerShell might decide not to show those properties to keep the output simple. Notice the **Path** and **Company** properties.
+1. Use Select-Object to display properties that were hidden: ```Get-Process | Select-Object ProcessName, Company, Path```
+1. Now use Group-Object to display all the different companies from software that is currently running on your computer: ```Get-Process | Group-Object Company | Sort-Object Count -Descending```
 
 
-## Task 4: Killing a process using a method
+## Task 5: Killing a process using a method
 1. Retrieve a list of processes with the name **mspaint** by entering this command: ```Get-Process mspaint```
 1. Make sure there is only one mspaint process: the process you started before. If there are more mspaint processes, try to close them until there is one left.
-1. **Do not continue beyond this point if there is not just 1 mspaint process.**
+1. :raised_hand: **Do not continue beyond this point if there is not just 1 mspaint process.**
 1. Run this command to retrieve extra information on the mspaint processes in general: ```Get-Process mspaint | Get-Member```
 1. Find the **methods** in the **MemberType** column.
-1. Make sure the is a **Kill** method. The kill method stops a process. We will stop our single mspaint process.
+1. Make sure there is a **Kill** method. The kill method stops a process. We will stop our single mspaint process.
 1. Assuming you have one mspaint process running, run this command: ```(Get-Process mspaint).Kill()```
-1. In the previous command you enclose the ```Get-Process mspaint``` command in parentheses to help PowerShell distinguish the object from the method. Imagine this command: ```Get-Process mspaint.Kill()```. If you would run the previous command, it would result in an error message. With the first set of parentheses we help PowerShell in distinguishing between the object **(Get-Process mspaint)** and the method **Kill**.
+1. In the previous command you enclose the ```Get-Process mspaint``` command in parentheses to help PowerShell distinguish the object from the method. Imagine this command: ```Get-Process mspaint.Kill()```. If you would run the previous command, it would result in an error message. With the first set of parentheses we help PowerShell in distinguishing between the object **(Get-Process mspaint)** and executing the method using **Kill()**.
 
 
-## Task x: Diving into datetime objects
-1. $CurrentDate = Get-Date
-1. $CurrentDate | Get-Member
-1. $CurrentDate.DayOfWeek
-1. $CurrentDate.Month
-1. $CurrentDate.AddDays(28)
-1. Verify in your calendar that the result of the last command is correct.
-
-
-## Task x: using variables
-1. $MyProc = get-process mspaint
-1. $MyProc
-1. $MyProc.Id
-1. $MyProc.Path
-1. $MyProc.kill()
-1. $CurrentDate = Get-Date
-1. $CurrentDate | Get-Member
-1. $CurrentDate.DayOfWeek
-1. $CurrentDate.Month
-1. $CurrentDate.AddDays(28)
-1. Verify in your calendar that the result of the last command is correct.
