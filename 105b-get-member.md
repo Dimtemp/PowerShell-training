@@ -31,7 +31,7 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Run this command to split the string on whitespace: ```'hello, world'.Split()```
 1. It should display both words on two different lines.
 1. :point_up: Split is the name of the method. We use parentheses at the end so we can optionally pass parameters. If we don't pass any parameters, the parentheses are **still required**. It's a bit awkward, but by using parentheses, even empty ones, we can see that a **method is executed**, instead of a **property being investigated**.
-1. This OOP-notation: 'hello, world'.Split(), means we want to **execute** the **Split** method of the string object.
+1. This OOP-notation: ```'hello, world'.Split()```, means we want to **execute** the **Split** method of the string object.
 1. Run this command to split the string on a dash: ```'31-12-2020'.Split('-')```
 1. It should display the numbers 30, 12, and 2020 on three different lines.
 1. Run this command to convert the string to upper case: ```'hello, world'.ToUpper()```
