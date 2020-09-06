@@ -28,7 +28,7 @@ function New-AzVMForPowerShellTraining {
         Credential  = $Cred
         AsJob = $true
         #Location by default same as vnet
-        #Size Standard_DS1_v2 (1 vcpus, 3.5 GiB memory)
+        #Size = Standard_DS1_v2 (1 vcpus, 3.5 GiB memory) Get-AzVMSize -location westeurope | where numberofcores -lt 2 | sort MemoryInMB
         #Image Win2016Datacenter (default), Win2012R2Datacenter, UbuntuLTS, Debian, ...
         #Priority = 'Spot' # spot instance
         #EvictionPolicy = 'Deallocate' # (or 'Delete')
