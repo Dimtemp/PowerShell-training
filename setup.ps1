@@ -8,25 +8,25 @@ function New-AzVMForPowerShellTraining {
         $Password = 'Pa55w.rd1234'
     )
 
-    $vnet = Get-AzVirtualNetwork | Out-GridView -OutputMode single -Title 'Select domain controller vnet'
+    $vnet = Get-AzVirtualNetwork # | Out-GridView -OutputMode single -Title 'Select domain controller vnet'
     if ($vnet.count -gt 1) { $vnet = $vnet | Out-GridView -OutputMode single -Title 'Select domain controller vnet' }
 
     $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet
-    if ($subnet.count -NE 1) { throw 'Domain controller vnet should contain only one subnet' }
+    if ($subnet.count -NE 1) { $subnet = $subnet | Out-GridView -OutputMode Single -Title 'Select subnet' }
 
     $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
     $Cred = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
 
     $AzVMArguments = @{
         Name = $VMName
-        ResourceGroupName = $VMName
+        ResourceGroupName = $vnet.ResourceGroupName # prefer $VMName, if other name then also new vnet
         DataDiskSizeInGb = 2
         VirtualNetworkName = $vnet.name
         SubnetName = $subnet.name
         OpenPorts = 3389
-        DomainNameLabel = $VMName   #  ???.eastus.cloudapp.azure.com
+        DomainNameLabel = $VMName   #  ???.westeurope.cloudapp.azure.com
         Credential  = $Cred
-        #AsJob = $true
+        AsJob = $true
         #Location by default same as vnet
         #Size Standard_DS1_v2 (1 vcpus, 3.5 GiB memory)
         #Image Win2016Datacenter (default), Win2012R2Datacenter, UbuntuLTS, Debian, ...
@@ -34,9 +34,33 @@ function New-AzVMForPowerShellTraining {
         #EvictionPolicy = 'Deallocate' # (or 'Delete')
     }
 
-    write-verbose @AzVMArguments
+    Write-Verbose @AzVMArguments
 
     New-AzVM @AzVMArguments
 }
 
-New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan'
+#Install-Module Az
+#Connect-AzAccount
+1..14 | foreach {
+    New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -username 'student' -VMName pwshvm$_  -Verbose
+}
+
+
+<#
+New-AzVM
+   [[-Zone] <System.String[]>] 
+   [-AddressPrefix <System.String>] 
+   [-AllocationMethod {Static | Dynamic}] 
+   [-AvailabilitySetName <System.String>] 
+   [-DefaultProfile <Microsoft.Azure.Commands.Common.Authentication.Abstractions.Core.IAzureContextContainer>] 
+   [-EnableUltraSSD] 
+   [-HostId <System.String>] 
+   [-MaxPrice <System.Double>]
+   [-EncryptionAtHost] 
+   [-ProximityPlacementGroupId <System.String>] 
+   [-PublicIpAddressName <System.String>] 
+   [-SecurityGroupName <System.String>] 
+   [-SubnetAddressPrefix <System.String>]  
+   [-SystemAssignedIdentity] 
+   [-UserAssignedIdentity <System.String>]    
+#>
