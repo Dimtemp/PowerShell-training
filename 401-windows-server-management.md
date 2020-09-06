@@ -17,8 +17,9 @@
 
 
 ## Task 2: Basic networking
-1. ```Test-Connection LON-DC1, LON-SVR1```
-1. ```Get-NetIPConfiguration```
+1. Run this command to view your IP configuration: ```Get-NetIPConfiguration```
+1. This command has also been aliased. Run this command and compare with the first output: ```gip```
+1. Run this command to send a ping to multiple servers: ```Test-Connection LON-DC1, LON-SVR1```
 
 
 ## Task 3: Software installation
@@ -26,14 +27,15 @@
 1. Run this command to list features with the name telnet: ```Get-WindowsFeature *telnet*```
 1. Notice the Name Column. We need these exact names for installation.
 1. Run this command to install the telnet client software: ```Install-WindowsFeature Telnet-Client```
-1. Notice the Success and Restart Needed columns.
+1. Notice the **Success** and **Restart Needed** columns.
 1. Verify the installation of telnet: ```Get-WindowsFeature Telnet-Client```
 
 
 ## Task 4: Install a web server
-1. ```Install-WindowsFeature Web-Server```
-1. ```mkdir c:\MyWebsite```
-1. ```New-WebSite PowerShellSchool -PhysicalPath C:\MyWebsite```
+1. Run this command to get a listing of windows features that containt web: ```Get-WindowsFeature *web*```
+1. Run this command to install a webserver ```Install-WindowsFeature Web-Server```
+1. Run this command to create a folder for the web servers source files: ```mkdir c:\MyWebsite```
+1. Run this command to create a website on the web server: ```New-WebSite PowerShellSchool -PhysicalPath C:\MyWebsite```
 
 
 ## Task 5: Disk Management
