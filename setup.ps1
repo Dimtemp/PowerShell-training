@@ -41,7 +41,8 @@ function New-AzVMForPowerShellTraining {
 
 #Install-Module Az
 #Connect-AzAccount
-1..14 | foreach {
+# Max 10 IPs per subscription per region!
+1..9 | foreach {
     New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -username 'student' -VMName pwshvm$_  -Verbose
 }
 
