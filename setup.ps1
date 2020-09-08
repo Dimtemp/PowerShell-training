@@ -49,4 +49,5 @@ Max 10 IPs per subscription per region!
 #>
 1..9 | foreach {
     New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_  -Verbose
+    # join the domain using New-AzureServiceADDomainExtensionConfig
 }
