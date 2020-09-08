@@ -4,11 +4,11 @@ function New-AzVMForPowerShellTraining {
     param(
         $VMName = 'pwshvm' + (Get-Random -Maximum 1000000),
         $DomainNameLabel = (Read-Host -Title 'Domain Name label'),
-        $username = (Read-Host -Title 'username'),
+        $username = 'Student',
         $Password = 'Pa55w.rd1234'
     )
 
-    $vnet = Get-AzVirtualNetwork # | Out-GridView -OutputMode single -Title 'Select domain controller vnet'
+    $vnet = Get-AzVirtualNetwork
     if ($vnet.count -gt 1) { $vnet = $vnet | Out-GridView -OutputMode single -Title 'Select domain controller vnet' }
 
     $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet
@@ -39,29 +39,14 @@ function New-AzVMForPowerShellTraining {
     New-AzVM @AzVMArguments
 }
 
-#Install-Module Az
-#Connect-AzAccount
-# Max 10 IPs per subscription per region!
-1..9 | foreach {
-    New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -username 'student' -VMName pwshvm$_  -Verbose
-}
-
-
 <#
-New-AzVM
-   [[-Zone] <System.String[]>] 
-   [-AddressPrefix <System.String>] 
-   [-AllocationMethod {Static | Dynamic}] 
-   [-AvailabilitySetName <System.String>] 
-   [-DefaultProfile <Microsoft.Azure.Commands.Common.Authentication.Abstractions.Core.IAzureContextContainer>] 
-   [-EnableUltraSSD] 
-   [-HostId <System.String>] 
-   [-MaxPrice <System.Double>]
-   [-EncryptionAtHost] 
-   [-ProximityPlacementGroupId <System.String>] 
-   [-PublicIpAddressName <System.String>] 
-   [-SecurityGroupName <System.String>] 
-   [-SubnetAddressPrefix <System.String>]  
-   [-SystemAssignedIdentity] 
-   [-UserAssignedIdentity <System.String>]    
+Make sure DC exists in powershell.lan domain
+https://github.com/Azure/azure-quickstart-templates/tree/master/301-create-ad-forest-with-subdomain
+
+Install-Module Az
+Connect-AzAccount
+Max 10 IPs per subscription per region!
 #>
+1..9 | foreach {
+    New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_  -Verbose
+}
