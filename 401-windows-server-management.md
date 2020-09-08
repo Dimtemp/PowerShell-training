@@ -41,10 +41,12 @@
 ## Task 5: Disk Management
 1. Run this command to list all disks: ```Get-Disk```
 1. Run this command to list all volumes: ```Get-Volume```
-1. Run this command to resize the E:-volume: ```Resize-Partition -DriveLetter E -Size 20GB```
+1. Run this command to determine the datadisk: ```Get-Volume | Where-Object Driveletter -match 'd|e' | Where-Object Filesystem -eq 'NTFS'```
+1. Run this command to resize the data disk (replace the Z with the letter you found in the previous step):
+1. ```Resize-Partition -DriveLetter Z -Size 5GB```
 1. Create a new partition on the disk:
 1. ```New-Partition -DiskNumber 1 -UseMaximumSize -AssignDriveLetter```
-1. A "Format disk" popup might appear. Click Cancel.
+1. A "Format disk" graphical popup might appear. If so, click Cancel.
 1. Notice the driveletter in the output. Also notice that OperationalStatus is still Unknown.
 1. Format the volume with NTFS using this command (replace the Z: with the new letter): ```Format-Volume -DriveLetter Z```
 1. Open the Windows Explorer with this command: ```Explorer.exe```
