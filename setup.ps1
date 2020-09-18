@@ -2,6 +2,7 @@ function New-AzVMForPowerShellTraining {
 
     [cmdletbinding()]
     param(
+        $ResourceGroupName = 'x',
         $VMName = 'pwshvm' + (Get-Random -Maximum 1000000),
         $DomainNameLabel = (Read-Host -Title 'Domain Name label'),
         $username = 'Student',
@@ -47,7 +48,5 @@ Install-Module Az
 Connect-AzAccount
 Max 10 IPs per subscription per region!
 #>
-1..9 | foreach {
-    New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_  -Verbose
-    # join the domain using New-AzureServiceADDomainExtensionConfig
-}
+1..6 | % { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_  -Verbose -AsJob }
+# join the domain using New-AzureServiceADDomainExtensionConfig
