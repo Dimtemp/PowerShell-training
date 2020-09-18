@@ -30,8 +30,10 @@
 1. You stopped the Paint application by retrieving it with a Get-Process command, and then piping the output to the Stop-Process command. Since the output is in the <Process>-form, the output will bind to the input parameter InputObject, because that's the form that is expected.
 
 
-## Task 2: pipline binding, in depth and advanced
+## Task 2: pipeline binding, in depth and advanced
 For this task you will need at least two computers. We're using a domain controller with the name LON-DC1 and a Windows 10 computer with the name LON-CL1. If you want to use other computernames that's ok. Just replace the names with your computernames. Make sure you're performing this exercise from the client computer: LON-CL1.
+1. Make sure the AD Module for PowerShell is installed:
+1. ```Install-WindowsFeature RSAT-AD-PowerShell```
 1. Retrieve all computers from Active Directory with this command: ```Get-ADComputer –Filter *```
 1. Send a ping to the domain controller with this command: ```ping LON-DC1```
 1. Ping was introduced in 1983, so that's a very old command. Now send a ping using a proper PowerShell command: ```Test-Connection LON-DC1```
