@@ -2,15 +2,23 @@ function New-AzVMForPowerShellTraining {
 
     [cmdletbinding()]
     param(
-        $ResourceGroupName = 'x',
+        [Parameter(Mandatory=$true)]
+        $ResourceGroupName,
+
         $VMName = 'pwshvm' + (Get-Random -Maximum 1000000),
-        $DomainNameLabel = (Read-Host -Title 'Domain Name label'),
+
+        [Parameter(Mandatory=$true)]
+        $DomainNameLabel,
+
         $username = 'Student',
         $Password = 'Pa55w.rd1234'
     )
 
-    $vnet = Get-AzVirtualNetwork
+    $vnet = Get-AzVirtualNetwork -ResourceGroupName $ResourceGroupName
     if ($vnet.count -gt 1) { $vnet = $vnet | Out-GridView -OutputMode single -Title 'Select domain controller vnet' }
+    if ($vnet.DhcpOptions.dnsservers[0] -ne '10.0.0.4') {
+        Write-Warning 'VNET DNS server has not (yet) been set to 10.0.0.4'
+    }
 
     $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet
     if ($subnet.count -NE 1) { $subnet = $subnet | Out-GridView -OutputMode Single -Title 'Select subnet' }
@@ -35,7 +43,7 @@ function New-AzVMForPowerShellTraining {
         #EvictionPolicy = 'Deallocate' # (or 'Delete')
     }
 
-    Write-Verbose @AzVMArguments
+    Write-Verbose $AzVMArguments
 
     New-AzVM @AzVMArguments
 }
@@ -48,5 +56,6 @@ Install-Module Az
 Connect-AzAccount
 Max 10 IPs per subscription per region!
 #>
-1..6 | % { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_  -Verbose -AsJob }
+
+1..6 | % { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_ -Verbose -ResourceGroupName 'pwsh-neu' }
 # join the domain using New-AzureServiceADDomainExtensionConfig
