@@ -54,7 +54,7 @@ For this task you will need at least two computers. We're using a domain control
 ### Solution 1: manually editing a file
 1. Run this command: ```Get-ADComputer –Filter * | Export-Csv computers.csv```
 1. Now open the file for editing with this command: ```Notepad computers.csv```
-1. Replace DnsHostName with ComuterName in the header of the file.
+1. Replace DnsHostName with ComputerName in the header of the file.
 1. Save the file and return to the PowerShell console.
 1. Run this command to send the ping: ```Import-Csv computers.csv | Test-Connection```
 1. The ping should be sent to the computers in the csv file successfully.
