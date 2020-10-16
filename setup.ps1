@@ -50,6 +50,9 @@ function New-AzVMForPowerShellTraining {
 
 <#
 Make sure DC exists in powershell.lan domain
+JSON template deploy: https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azdeployment?view=azps-4.8.0
+
+DC:
 https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain
 or optionally: 
 https://github.com/Azure/azure-quickstart-templates/tree/master/301-create-ad-forest-with-subdomain
