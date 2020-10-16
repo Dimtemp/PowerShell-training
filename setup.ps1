@@ -50,6 +50,8 @@ function New-AzVMForPowerShellTraining {
 
 <#
 Make sure DC exists in powershell.lan domain
+https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain
+or optionally: 
 https://github.com/Azure/azure-quickstart-templates/tree/master/301-create-ad-forest-with-subdomain
 
 Install-Module Az
