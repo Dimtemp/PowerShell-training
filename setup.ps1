@@ -51,6 +51,8 @@ function New-AzVMForPowerShellTraining {
 <#
 Make sure DC exists in powershell.lan domain
 JSON template deploy: https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azdeployment?view=azps-4.8.0
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quick-start-templates/master/101-sql-logical-server/azuredeploy.json" -administratorLogin $adminUser -administratorLoginPassword $adminPassword
 
 DC:
 https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain
