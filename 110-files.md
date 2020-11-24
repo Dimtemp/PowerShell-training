@@ -116,7 +116,7 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 ## Task 8: JSON files
 1. Run this command to store a URL in a variable: ```$url = 'https://ipinfo.io/json'```
 1. Run this command to retrieve info from the URL in JSON format, and store it in a variable: ```$ip = Invoke-WebRequest $url```
-1. **Note:** if the previous command produces an error you can try another URL, like 'https://ipapi.co/8.8.8.8/json'. Just repeat the first command with this URL.
+1. **Note:** if the previous command produces an error you can try another URL, like ```'https://ipapi.co/8.8.8.8/json'```. Just repeat the first command with this URL.
 1. Now investigate the contents from the variable: ```$ip```
 1. Notice the **Content** property. Which is the raw content in the reply from the webserver.
 1. Now Investigate the Content from the variable: ```$ip.Content```
