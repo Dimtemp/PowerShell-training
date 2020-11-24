@@ -121,6 +121,7 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. Notice the **Content** property. Which is the raw content in the reply from the webserver.
 1. Now Investigate the Content from the variable: ```$ip.Content```
 1. Notice the output is in textual format. You can convert it using a PowerShell command: ```$ip.Content | ConvertFrom-Json```
+1. The output is a PowerShell object. The original source was textual (HTTP) containing JSON-formatted data.
 
 
 ## Task 9: HTML files
