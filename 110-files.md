@@ -113,7 +113,17 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. This procedure is a lot shorter than the procedure in task 6. We only need to store the XML file once, to perform comparisons on the current state.
 
 
-## Task 8: HTML files
+## Task 8: JSON files
+1. Run this command to store a URL in a variable: ```$url = 'https://ipinfo.io/json'```
+1. Run this command to retrieve info from the URL in JSON format, and store it in a variable: ```$ip = Invoke-WebRequest $url```
+1. **Note:** if the previous command produces an error you can try another URL, like 'https://ipapi.co/8.8.8.8/json'. Just repeat the first command with this URL.
+1. Now investigate the contents from the variable: ```$ip```
+1. Notice the **Content** property. Which is the raw content in the reply from the webserver.
+1. Now Investigate the Content from the variable: ```$ip.Content```
+1. Notice the output is in textual format. You can convert it using a PowerShell command: ```$ip.Content | ConvertFrom-Json```
+
+
+## Task 9: HTML files
 1. Run this command to display a list of running processes, that show only the working set (WS), Id and process name, sorted by working set: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10```
 1. To convert the process list to an HTML page, run this command: ```Get-Process | Sort-Object WS | Select-Object WS, Id, ProcessName -First 10 | ConvertTo-HTML```
 1. The HTML output is displayed in the PowerShell console window. That's not what we want.
