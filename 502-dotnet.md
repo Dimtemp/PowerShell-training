@@ -1,5 +1,11 @@
 # .NET framework
 
+## Performing math
+PowerShell has no reference of Pi, or cannot perform some popular math functions. We can use the .NET framework for this.
+1. Run this command to convert a negative number to positive: ```[Math]::Abs(-50)```
+1. Run this command to display the Pi constant: ```[Math]::Pi```
+
+
 ## String handling
 1. Create a string object using this command: ```"Hello world"```
 1. Inspect the object using Get-Member: ```"Hello world" | Get-Member```
@@ -23,15 +29,9 @@
 1. Make sure you don't run a Paint process: ```Get-Process -Name mspaint```
 1. Before you continue, make sure you close all running paint processes to prevent data loss.
 1. Start mspaint: ```mspaint```
-1. Retrieve the mspaint process and store it in a variable: ```$p = Get-Process mspaint```
-# Retrieve a reference to the instance of System.Diagnostics.Process
-$p | get-member
-$p.name
-$p.kill()   # same: Stop-Process -name mspaint
-
-
-## Inspecting environment variables
-env var
-
-## Performing math
-math abs
+1. Retrieve the mspaint process and store it in a variable: ```$p = Get-Process -Name mspaint```
+1. Inspect the variable: ```$p```
+1. Make sure it only contains a single mspaint process. If not, close, and optionally save, all mspaint processes.
+1. Inspect the variable using Get-Member: ```$p | Get-Member```
+1. Notice the Type on top. It should display: "TypeName: System.Diagnostics.Process". This refers to the Process class in the System.Diagnostics namespace of the .NET framework.
+1. Also notice the kill method. Run this command to kill the process: ```$p.Kill()```
