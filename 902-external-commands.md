@@ -1,4 +1,8 @@
-# Call operator
+# External commands
+When using PowerShell, you might want to rely on external programs and executables. There are different ways, all with their own advantages and disadvantages, to run external commands.
+
+
+## Call operator
 The call operator, also known as the "invocation operator", lets you run commands that are stored in variables and represented by strings or script blocks.
 
 This example stores a command in a string and executes it using the call operator.
@@ -22,7 +26,7 @@ try again.
 ```
 
 
-# Invoke-Expression
+## Invoke-Expression
 The Invoke-Expression cmdlet can execute code that causes parsing errors when using the call operator.
 ```
 PS> $c = "Get-Service -Name Spooler"
@@ -35,7 +39,7 @@ Status   Name               DisplayName
 Running  Spooler            Print Spooler
 ```
 
-# Start-Process
+## Start-Process
 The Start-Process cmdlet starts one or more processes.
 
 To specify the program that runs in the process, enter an executable file or script file, or a file that can be opened by using a program on the computer. If you specify a non-executable file, Start-Process starts the program that is associated with the file, similar to the Invoke-Item cmdlet.
@@ -56,7 +60,7 @@ Start-Process -FilePath "$env:comspec" -ArgumentList "/c dir `"%systemdrive%\pro
 Start-Process -FilePath "$env:comspec" -ArgumentList "/c","dir","`"%systemdrive%\program files`""
 ```
 
-# Using WMI to start a process
+## Using WMI to start a process
 1. Run this command to get a process listing: ```Get-Process```
 1. Run this command to get a process listing using WMI: ```Get-WmiObject win32_process```
 1. Run this command to get a selected process listing using WMI: ```Get-WmiObject win32_process | Select-Object Handles, WS, ProcessId, ProcessName```
@@ -64,3 +68,6 @@ Start-Process -FilePath "$env:comspec" -ArgumentList "/c","dir","`"%systemdrive%
 1. Run this command to use the Create method of the win32_process class to start a process: ```Invoke-WmiMethod -Class win32_process -Name create -ArgumentList 'notepad.exe'```
 1. Verify that notepad has started.
 1. Close notepad.
+
+## Summary
+Start-Process, Invoke-Expression and the call operator are not very popular in day-to-day use of PowerShell. The advantage of using WMI to start a process is that it is very flexible, and can be used to start processes on remote machines.
