@@ -3,9 +3,9 @@ The call operator, also known as the "invocation operator", lets you run command
 
 This example stores a command in a string and executes it using the call operator.
 ```
-PS> $c = "get-executionpolicy"
+PS> $c = "Get-ExecutionPolicy"
 PS> $c
-get-executionpolicy
+Get-ExecutionPolicy
 PS> & $c
 AllSigned
 ```
