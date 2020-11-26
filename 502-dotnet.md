@@ -35,3 +35,10 @@ PowerShell has no reference of Pi, or cannot perform some popular math functions
 1. Inspect the variable using Get-Member: ```$p | Get-Member```
 1. Notice the Type on top. It should display: "TypeName: System.Diagnostics.Process". This refers to the Process class in the System.Diagnostics namespace of the .NET framework.
 1. Also notice the kill method. Run this command to kill the process: ```$p.Kill()```
+
+In this case we might have used the Stop-Process command, which is native to PowerShell. Probably, Stop-Process is executing the Kill() method also.
+1. You can verify this. First verify that the Stop-Process command is a cmdlet: ```Get-Command Get-Process```
+1. It shows that Stop-Process is indeed a cmdlet, and it is part of the Microsoft.PowerShell.Management module.
+1. Now open the PowerShell repository on Github by opening this URL:
+1. https://github.com/PowerShell/PowerShell/blob/master/src/Microsoft.PowerShell.Commands.Management/commands/management/Process.cs
+1. Type Ctrl-F and look for the **Kill()** method.
