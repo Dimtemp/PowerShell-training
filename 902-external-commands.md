@@ -56,3 +56,11 @@ Start-Process -FilePath "$env:comspec" -ArgumentList "/c dir `"%systemdrive%\pro
 Start-Process -FilePath "$env:comspec" -ArgumentList "/c","dir","`"%systemdrive%\program files`""
 ```
 
+# Using WMI to start a process
+1. Run this command to get a process listing: ```Get-Process```
+1. Run this command to get a process listing using WMI: ```Get-WmiObject win32_process```
+1. Run this command to get a selected process listing using WMI: ```Get-WmiObject win32_process | Select-Object Handles, WS, ProcessId, ProcessName```
+1. Notice the similarities and differences. 
+1. Run this command to use the Create method of the win32_process class to start a process: ```Invoke-WmiMethod -Class win32_process -Name create -ArgumentList 'notepad.exe'```
+1. Verify that notepad has started.
+1. Close notepad.
