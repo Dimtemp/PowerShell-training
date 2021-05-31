@@ -26,11 +26,11 @@ Note: as with most PowerShell exercises, it's best not to copy-paste the command
 1. Open a PowerShell console.
 1. Run this command: ```Get-Process```
 1. This will display a process listing. Notice it is sorted alphabetically on ProcessName.
-1. Run this command: ```Get-Process | Sort-Object Handles```
-1. Notice that the process listing is sorted on the Handles column.
-1. Run this command: ```Get-Process | Sort-Object Handles -Descending```
-1. Notice that the process listing is sorted descending  on the Handles column.
-1. Run this command: ```Get-Process | Sort id```
+1. Run this command: ```Get-Process | Sort-Object Id```
+1. Notice that the process listing is sorted on the Id column.
+1. Run this command: ```Get-Process | Sort-Object Id -Descending```
+1. Notice that the process listing is sorted descending on the Id column.
+1. Run this command: ```Get-Process | Sort Id```
 1. The result is sorted on the id column. Please notice the use of the sort alias instead of the Sort-Object cmdlet. Many commands that have a **Object** Noun, an alias exists without the noun. For example, Sort is an alias for Sort-Object, Measure is an alias for Measure-Object.
 
 
