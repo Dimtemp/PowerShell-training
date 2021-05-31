@@ -43,9 +43,9 @@
 1. Use Enter, spacebar or Q to scroll through the help until the prompt returns.
 1. Run this command: ```Get-Help about*```
 1. This displays a list of all about-articles in PowerShell. These articles can explain different techniques, without specifically adressing a particular command.
-1. Run this command: ```Get-Help about_WMI```
-1. This displays help about using Windows Management Instrumentation (WMI).
-1. Note: You're not supposed to read this WMI article at this moment.
+1. Run this command: ```Get-Help about_Variables```
+1. This displays help about using variables.
+1. Note: You're not required to read this article at this moment. Variables are discussed in another chapter.
 
 
 ## Task 4: help with a GUI (Graphical User Interface)
