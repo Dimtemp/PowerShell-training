@@ -9,7 +9,7 @@ Note: as with most PowerShell exercises, it's best not to copy-paste the command
 1. Run the following command to view the previous processes, but only with a few specific properties: Id and ProcessName.
 1. ```Get-Process w* | Select-Object Id, ProcessName```
 1. Run the following command to view the previous processes, but with other properties:
-1. ```Get-Process w* | Select-Object Handles, Id, ProcessName```
+1. ```Get-Process w* | Select-Object WS, Id, ProcessName```
 
 
 ## Task 2: The first will be last
@@ -42,16 +42,16 @@ Note: as with most PowerShell exercises, it's best not to copy-paste the command
 ## Task 4: Hash as in hashtable
 1. With Select-Object you can replace column headers (property names) and perform data modifications and calculations.
 1. Let's run a WMI command to retrieve disk space (WMI is covered in depth in a later module).
-1. ```Get-WmiObject -class win32_logicaldisk```
+1. ```Get-CimInstance -ClassName win32_logicaldisk```
 1. Notice the FreeSpace and Size properties. It'll probably include so many digits it's hard to tell what the size is, and how many freespace there still is.
-1. Let's focus on two properties: ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, Size```
-1. Now let's perform a calculation on the size property: ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={$_.Size/1GB}}```
+1. Let's focus on two properties: ```Get-CimInstance -ClassName win32_logicaldisk | Select-Object DeviceID, Size```
+1. Now let's perform a calculation on the size property: ```Get-CimInstance -ClassName win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={$_.Size/1GB}}```
 1. The size is now displayed in gigabytes.
 1. The @-sign instructs PowerShell to create a hashtable, which is a property name and it's value. That's what name and expression refer to within the {} brackets. The name is the name of the property. Expression refers to the formula you want to use to calculate the property value. In this case we're dividing the number of bytes by a Gigabyte (1GB).
 1. Let's do the same for freespace, while keeping the previous two properties: DiveID and Size.
-1. ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={$_.Size/1GB}}, @{name='FreeSpace(G)'; expression={$_.FreeSpace/1GB}}```
+1. ```Get-CimInstance -ClassName win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={$_.Size/1GB}}, @{name='FreeSpace(G)'; expression={$_.FreeSpace/1GB}}```
 1. The output probably contains a lot of digits. Let's round the numbers so we get human readable output.
-1. ```Get-WmiObject -class win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={[int]($_.Size/1GB)}}, @{name='FreeSpace(G)'; expression={[int]($_.FreeSpace/1GB)}}```
+1. ```Get-CimInstance -ClassName win32_logicaldisk | Select-Object DeviceID, @{name='Size(G)'; expression={[int]($_.Size/1GB)}}, @{name='FreeSpace(G)'; expression={[int]($_.FreeSpace/1GB)}}```
 1. In a later chapter we'll go further into formatting the output.
 1. Close the PowerShell window.
 
