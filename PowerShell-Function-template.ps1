@@ -74,8 +74,18 @@ function Verb-Noun
     Process
     {
         Write-Verbose 'something'
+
         if ($pscmdlet.ShouldProcess("Target", "Operation"))
         {
+            # do something
+
+            $properties = [ordered]@{
+                         'Version' = 2;
+                         'Model'   = 'x'
+                         }
+
+            $output = New-Object -TypeName PSObject -Property $properties
+            Write-Output $output
         }
     }
  
@@ -83,4 +93,3 @@ function Verb-Noun
     {
     }
 }
-
