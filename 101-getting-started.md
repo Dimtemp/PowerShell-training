@@ -34,7 +34,8 @@
 
 
 ## Task 4: Open the Integrated Scripting Environment (ISE)
-1. With the PowerShell console open, type **ISE** and hit Enter.
+### Note: this only works in Windows.
+1. With the PowerShell console open, type **powershell_ise** and hit Enter.
 1. A graphical editor window will open.
 1. On the taskbar, right-click the Windows PowerShell ISE icon and then click **Pin to taskbar**.
 1. On the Windows PowerShell ISE toolbar, click **View** in the menu bar, and click **Show Script Pane  Ctrl-R**.
