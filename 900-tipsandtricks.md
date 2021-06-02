@@ -27,9 +27,9 @@ Let's assume you **always** run a specific command with the Force parameter: ```
 
 
 # PowerShell profile
-A PowerShell profile is a PowerShell script that will be executed each time that PowerShell starts. With this file you can prepare you're PowerShell environment more specifically for a user or computersystem. A custom prompt, or specific parameter values, are popular items to store in a profile.
+A PowerShell profile is a PowerShell script that will be executed each time that PowerShell starts. With this file you can prepare your PowerShell environment more specifically for a user or computersystem. A custom prompt, or specific parameter values, are popular items to store in a profile.
 1. Run this command to navigate to the home directory: ```Set-Location $HOME```
-2. Run this command to navigate to the Documents\WindowsPowerShell location: ```Set-Location Document\WindowsPowerShell```
+2. Run this command to navigate to the Documents\WindowsPowerShell location: ```Set-Location Documents\WindowsPowerShell```
 3. If the last command fails because the folder does not exists, run this command: ```mkdir Documents; mkdir Documents\WindowsPowerShell```
 4. Create a PowerShell profile using notepad: ```notepad profile.ps1```
 5. Now put this text in the notepad window and save it:
