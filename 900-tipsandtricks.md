@@ -5,6 +5,7 @@
 4. You can replace the default prompt with a custom prompt by definining a function with the name **prompt**: ```function prompt { "PS> " }```
 5. Notice the custom prompt that returns at this moment.
 6. You might want to use environment variables in a custom prompt. Let's mimic a Unix/Linux prompt: ```function prompt { "[$env:username@$env:computername] " }```
+6. Here's a custom prompt that uses color and current date en time: ```function prompt { Write-Host ("{0} PS>" -f (Get-Date)) -ForegroundColor Green -NoNewline; ' ' }```
 7. Sadly, the prompt is being reset as soon as you close the PowerShell session. We'll store the custom prompt in a profile in a later exercise.
 8. For more information, run this command: ```Get-Help about_Prompts```
 
@@ -39,7 +40,8 @@ A PowerShell profile is a PowerShell script that will be executed each time that
 9. Verify the custom prompt is displayed.
 10. Run this command to verify a forced directory listing: ```Get-ChildItem $HOME```
 11. Run this command to verify a descending sorted process listing: ```Get-Process | Select-Object Id, ProcessName | Sort-Object Id```
+12. For more information, run this command: ```Get-Help about_Profiles```
 
 Profiles that are created in the **$PSHOME** folder, instead of the **$HOME** folder, also load automatically when PowerShell starts. This might require extra permissions. Also, a profile created in the **$PSHOME** folder applies to every PowerShell user of the system, where a profile created in the **$HOME** folder is personal.
 
-1. For more information, run this command: ```Get-Help about_Profiles```
+
