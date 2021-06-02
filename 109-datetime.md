@@ -20,7 +20,14 @@
 1. Run this command to display a long date string: ```$now.ToLongTimeString()```
 
 
-## Task 2: working with timespans
+# Task 2: Formatting dates
+In this task we're going to work with different ways to format date output. Since many regions in the world use different date formats, it's recommended to use a standard date format. The ISO 8601 standard is a nice one, because dates and times are arranged so the largest item (the year) is placed to the left and each successively smaller item is placed to the right of the previous item.
+1. Use a format string to display date and time. This command runs on all versions of PowerShell: ```"{0:yyyy}-{0:MM}-{0:dd}T{0:HH}:{0:mm}:{0:ss}" -f (Get-Date)```
+1. Use the format parameter of Get-Date: ```Get-Date -Format s```
+### More info: https://xkcd.com/1179/
+
+
+## Task 3: working with timespans
 1. Run this command to inspect the contents of the $now variable: ```$now```
 1. Run this command to store the current datetime in a new variable: ```$later = Get-Date```
 1. Run this command to subtract both objects: ```$later - $now```
@@ -29,3 +36,8 @@
 1. Retrieve several properties from your timespan object:
 1. ```$timespan.TotalMinutes``` is the number of minutes that has elapsed.
 1. ```$timespan.TotalSeconds``` is the number of seconds that has elapsed. Notice these two fields exclude each other.
+
+
+![ISO 8601 from XKCD](https://imgs.xkcd.com/comics/iso_8601.png)
+Format: ![My Alt Text](https://imgs.xkcd.com/comics/iso_8601.png)
+
