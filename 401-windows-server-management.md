@@ -1,8 +1,9 @@
 # Windows Server Management
 
-#### Most commands in this section only work on Windows servers. Make sure you're logged on to the LON-DC1, or LON-SVR1 virtual machine.
+#### Most commands in this section only work on Windows servers. Make sure you're logged on to the LON-DC1, or LON-SVR1 virtual machine if provided in a course environment.
 
 ## Task 1: Working with the Windows eventlog
+### Make sure you're running PowerShell 5 or earlier. Skip this task if you're running PowerShell 6 or later.
 1. Run this command to list all event logs: ```Get-Eventlog -List```
 1. Notice the System Log.
 1. Run this command to view the System log: ```Get-Eventlog -LogName system```
@@ -32,7 +33,8 @@
 
 
 ## Task 4: Install a web server
-1. Run this command to get a listing of windows features that containt web: ```Get-WindowsFeature *web*```
+### Skip this Task if you're running PowerShell 6 or later.
+1. Run this command to get a listing of all windows features that contain the string **web**: ```Get-WindowsFeature *web*```
 1. Run this command to install a webserver ```Install-WindowsFeature Web-Server```
 1. Run this command to create a folder for the web servers source files: ```mkdir c:\MyWebsite```
 1. Run this command to create a website on the web server: ```New-WebSite PowerShellSchool -PhysicalPath C:\MyWebsite```
