@@ -1,4 +1,4 @@
-# Custom prompt
+# Task 1: a custom prompt
 1. Start a PowerShell session and run this command to inspect the pre-loaded functions (**notice the colon at the end**): ```Get-ChildItem function:```
 2. Notice a **prompt** function. 
 3. Let's investigate the contents of the **prompt** function: ```$function:prompt```
@@ -9,7 +9,7 @@
 8. For more information, run this command: ```Get-Help about_Prompts```
 
 
-# PSDefaultParameterValues
+# Task 2: PSDefaultParameterValues
 Let's assume you **always** run a specific command with the Force parameter: ```Get-ChildItem -Force```. You can set custom default values for cmdlet and advanced function parameters. This way, you don't need to specify those parameters anymore.
 1. Run this command to inspect the current default parameters value variable: ```$PSDefaultParameterValues```
 2. It is expected to be empty.
@@ -26,7 +26,7 @@ Let's assume you **always** run a specific command with the Force parameter: ```
 13. For more information, run this command: ```Get-Help about_Parameters_Default_Values```
 
 
-# PowerShell profile
+# Task 3: PowerShell profile
 A PowerShell profile is a PowerShell script that will be executed each time that PowerShell starts. With this file you can prepare your PowerShell environment more specifically for a user or computersystem. A custom prompt, or specific parameter values, are popular items to store in a profile.
 1. Run this command to navigate to the home directory: ```Set-Location $HOME```
 2. Run this command to navigate to the Documents\WindowsPowerShell location: ```Set-Location Documents\WindowsPowerShell```
