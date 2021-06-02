@@ -28,4 +28,18 @@ Let's assume you **always** run a specific command with the Force parameter: ```
 
 # PowerShell profile
 A PowerShell profile is a PowerShell script that will be executed each time that PowerShell starts. With this file you can prepare you're PowerShell environment more specifically for a user or computersystem. A custom prompt, or specific parameter values, are popular items to store in a profile.
+1. Run this command to navigate to the home directory: ```Set-Location $HOME```
+2. Run this command to navigate to the Documents\WindowsPowerShell location: ```Set-Location Document\WindowsPowerShell```
+3. If the last command fails because the folder does not exists, run this command: ```mkdir Documents; mkdir Documents\WindowsPowerShell```
+4. Create a PowerShell profile using notepad: ```notepad profile.ps1```
+5. Now put this text in the notepad window and save it:
+6. ```function prompt { "[$env:username@$env:computername] " }```
+7. ```$PSDefaultParameterValues = @{"Get-ChildItem:Force"=$true; "Sort-Object:Descending"=$true}```
+8. Start a new PowerShell session.
+9. Verify the custom prompt is displayed.
+10. Run this command to verify a forced directory listing: ```Get-ChildItem $HOME```
+11. Run this command to verify a descending sorted process listing: ```Get-Process | Select-Object Id, ProcessName | Sort-Object Id```
 
+Profiles that are created in the **$PSHOME** folder, instead of the **$HOME** folder, also load automatically when PowerShell starts. This might require extra permissions. Also, a profile created in the **$PSHOME** folder applies to every PowerShell user of the system, where a profile created in the **$HOME** folder is personal.
+
+1. For more information, run this command: ```Get-Help about_Profiles```
