@@ -24,6 +24,8 @@
 1. In the PowerShell console window, type ```Get-Process -Na``` and press **Tab**. PowerShell will complete the command to ```Get-Process -Name```.
 1. Make sure you complete the command to this: ```Get-Process -Name csrss``` and press Enter.
 1. This will show a list of processes with the name **csrss**.
+1. In the PowerShell console window, type ```Get``` and press **F8**. PowerShell will complete the command to ```Get-Process -Name```.
+1. Press **F8** or **Shift-F8** to cycle through all commands in the history that start with **Get**.
 1. Press **arrow up** on your keyboard to show the last command.
 1. Use the arrow up and down keys to scroll through the last few commands.
 1. Press **ESC** on your keyboard to clear the input line.
@@ -31,6 +33,7 @@
 1. Press **home** on your keyboard to set the cursor at the beginning of the command.
 1. Press **end** to set the cursor at the end of the command.
 1. Press **ESC** again to clear the input line.
+1. Finally, long running command's can be cancelled. Try it: ```Sleep 60```. Cancel the command using **Ctrl-C** before the command completes.
 
 
 ## Task 4: Open the Integrated Scripting Environment (ISE)
