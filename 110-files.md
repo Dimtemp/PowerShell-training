@@ -41,7 +41,7 @@ Note: you might be able to use Select-Object and Sort-Object on text files using
 1. We can try to format the output like the table that Get-Process produces: ```Import-CSV procs.csv | Select-Object Handles, NPM, PM, WS, ID, ProcessName```
 1. Try to sort on ProcessName: ```Import-CSV procs.csv | Sort-Object ProcessName | Select-Object Handles, ProcessName```
 1. It works. Now try to sort on Handles: ```Import-CSV procs.csv | Sort-Object Handles | Select-Object Handles, ProcessName```
-1. The Handles column is sorted alphabetically, and not numerically. This has no use to me. Clearly, the CSV output is not as human friendly as the first table. Maybe an XML file can help.
+1. The Handles column is sorted alphanumeric, and not numeric. This has no use to me. Clearly, the CSV output is not as human friendly as the first table. Maybe an XML file can help.
 
 
 ## Task 4: Extensible Markup Language (XML) files
