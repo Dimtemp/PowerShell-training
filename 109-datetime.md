@@ -24,7 +24,8 @@
 In this task we're going to work with different ways to format date output. Since many regions in the world use different date formats, it's recommended to use a standard date format. The ISO 8601 standard is a nice one, because dates and times are arranged so the largest item (the year) is placed to the left and each successively smaller item is placed to the right of the previous item.
 1. Use a format string to display date and time. This command runs on all versions of PowerShell: ```"{0:yyyy}-{0:MM}-{0:dd}T{0:HH}:{0:mm}:{0:ss}" -f (Get-Date)```
 1. Use the format parameter of Get-Date: ```Get-Date -Format s```
-### More info: https://xkcd.com/1179/
+
+![ISO 8601 from XKCD.com](https://imgs.xkcd.com/comics/iso_8601.png)
 
 
 ## Task 3: working with timespans
@@ -38,6 +39,4 @@ In this task we're going to work with different ways to format date output. Sinc
 1. ```$timespan.TotalSeconds``` is the number of seconds that has elapsed. Notice these two fields exclude each other.
 
 
-![ISO 8601 from XKCD](https://imgs.xkcd.com/comics/iso_8601.png)
-Format: ![My Alt Text](https://imgs.xkcd.com/comics/iso_8601.png)
 
