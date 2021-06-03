@@ -17,7 +17,7 @@
 1. Start another job and store the job output in a second variable: ```$myJob2 = Start-Job { Get-ChildItem C:\ }```
 1. Run this command to inspect the job object: ```$myJob2```
 1. Repeat the last command until the Job state is Completed.
-1. Inspect the contents of the job, while keeping the job output in the job: ```$myJob | Receive-Job -Keep```
+1. Inspect the contents of the job, while keeping the job output in the job: ```$myJob2 | Receive-Job -Keep```
 1. Run this command to inspect all jobs: ```Get-Job```
 1. Notice the Last job still has data, but the job before that doesn't. 
 1. Run this command to list all completed jobs: ```Get-Job -State Completed```
