@@ -1,4 +1,4 @@
-# Unlimited drives (no joke!)
+# Unlimited drives
 In this chapter we're going to work with the filesystem and other 'providers'. Make sure you perform this procedure on a computer where you have write permissions, and where you can break a leg.
 
 It's assumed you have performed the datetime exercise before beginning with this module.
