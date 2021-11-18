@@ -61,6 +61,7 @@ https://github.com/Azure/azure-quickstart-templates/tree/master/application-work
 
 Install-Module Az
 Connect-AzAccount
+Get-AzSubscription | Where name -match 'somename' | Select-AzSubscription
 Max 10 IPs per subscription per region!
 #>
 
