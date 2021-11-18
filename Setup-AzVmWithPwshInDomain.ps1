@@ -73,3 +73,6 @@ Max 10 IPs per subscription per region!
 # join to domain  (this works on running VM)
 1..6 | % { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName 'pwsh' -VMName "pwshvm$_" }
 # or New-AzureServiceADDomainExtensionConfig or Add-Domain 'PowerShell.lan' -Restart
+
+# retrieve public IPs and FQDN
+Get-AzPublicIpAddress | select resourcegroupname, name, location, ProvisioningState, PublicIpAllocationMethod, IpAddress, @{n='Fqdn'; e={$_.DnsSettings.Fqdn}} | ft -a
