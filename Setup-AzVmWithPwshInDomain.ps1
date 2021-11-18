@@ -55,9 +55,9 @@ New-AzResourceGroup -Name $resourceGroupName -Location $location
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quick-start-templates/master/101-sql-logical-server/azuredeploy.json" -administratorLogin $adminUser -administratorLoginPassword $adminPassword
 
 DC:
-https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain
+https://github.com/Azure/azure-quickstart-templates/tree/master/application-workloads/active-directory/active-directory-new-domain
 or optionally: 
-https://github.com/Azure/azure-quickstart-templates/tree/master/301-create-ad-forest-with-subdomain
+https://github.com/Azure/azure-quickstart-templates/tree/master/application-workloads/active-directory/create-ad-forest-with-subdomain
 
 Install-Module Az
 Connect-AzAccount
