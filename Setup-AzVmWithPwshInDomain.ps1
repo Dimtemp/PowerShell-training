@@ -3,15 +3,17 @@ function New-AzVMForPowerShellTraining {
     [cmdletbinding()]
     param(
         [Parameter(Mandatory=$true)]
-        $ResourceGroupName,
+        [string]$ResourceGroupName,
 
-        $VMName = 'pwshvm' + (Get-Random -Maximum 1000000),
+        [string]$VMName = 'pwshvm' + (Get-Random -Maximum 1000000),
 
         [Parameter(Mandatory=$true)]
-        $DomainNameLabel,
+        [string]$DomainNameLabel,
 
-        $UserName = 'Student',
-        $Password = 'Pa55w.rd1234'
+        [string]$UserName = 'Student',
+        [string]$Password = 'Pa55w.rd1234',
+        
+        [switch]$AsJob
     )
 
     $vnet = Get-AzVirtualNetwork -ResourceGroupName $ResourceGroupName
