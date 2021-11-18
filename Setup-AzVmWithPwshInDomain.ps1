@@ -10,7 +10,7 @@ function New-AzVMForPowerShellTraining {
         [Parameter(Mandatory=$true)]
         $DomainNameLabel,
 
-        $username = 'Student',
+        $UserName = 'Student',
         $Password = 'Pa55w.rd1234'
     )
 
@@ -65,8 +65,9 @@ Get-AzSubscription | Where name -match 'somename' | Select-AzSubscription
 Max 10 IPs per subscription per region!
 #>
 
+# Create VMs
 1..6 | % { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_ -Verbose -ResourceGroupName 'pwsh-neu' }
 
 # join to domain  (this works on running VM)
-1..6 | % { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName 'pwsh' -VMName 'pwshvm$_' }
+1..6 | % { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName 'pwsh' -VMName "pwshvm$_" }
 # or New-AzureServiceADDomainExtensionConfig or Add-Domain 'PowerShell.lan' -Restart
