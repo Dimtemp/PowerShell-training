@@ -73,8 +73,7 @@ Max 10 IPs per subscription per region!
 # join to domain  (this works on running VM)
 1..6 | % { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName 'pwsh' -VMName "pwshvm$_" }
 # or New-AzureServiceADDomainExtensionConfig
-# or $cred = Get-Credential -UserName 'powershell\dimitri' -Message 'domain admin'
-# Add-Computer 'PowerShell.lan' -Restart -Credential $cred
+# or Add-Computer 'PowerShell.lan' -Restart -Credential (Get-Credential -UserName 'powershell\dimitri' -Message 'domain admin')
 
 
 
