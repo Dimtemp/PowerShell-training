@@ -151,7 +151,7 @@ This command retrieves disk info from the LON-DC1 computer.
 
 ## Finished module
 Your module should now look like this:
-```
+```powershell
 Function motd { 'Old programmers never die... They just decompile.' }
 
 Function Get-DiskSpace {
