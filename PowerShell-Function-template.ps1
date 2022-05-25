@@ -1,48 +1,42 @@
-<#
-.SYNOPSIS
-   Short description
-.DESCRIPTION
-   Long description
-.EXAMPLE
-   Example of how to use this cmdlet
-.EXAMPLE
-   Another example of how to use this cmdlet
-.INPUTS
-   Inputs to this cmdlet (if any)
-.OUTPUTS
-   Output from this cmdlet (if any)
-.NOTES
-   General notes
-.COMPONENT
-   The component this cmdlet belongs to
-.ROLE
-   The role this cmdlet belongs to
-.FUNCTIONALITY
-   The functionality that best describes this cmdlet
-#>
-function Verb-Noun
-{
-    [CmdletBinding(DefaultParameterSetName='Parameter Set 1', 
-                  SupportsShouldProcess=$true, 
-                  PositionalBinding=$false,
-                  HelpUri = 'http://www.microsoft.com/',
-                  ConfirmImpact='Medium')]
-    [Alias()]
+function Verb-Noun {
+
+    <#
+    .SYNOPSIS
+    Short description
+    .DESCRIPTION
+    Long description
+    .EXAMPLE
+    Verb-Noun
+    Example of how to use this cmdlet
+    .EXAMPLE
+    Verb-Nound -Param1 test
+    Another example of how to use this cmdlet
+    .INPUTS
+    Inputs to this cmdlet (if any)
+    .OUTPUTS
+    Output from this cmdlet (if any)
+    .NOTES
+    General notes
+    #>
+
+   [CmdletBinding(DefaultParameterSetName='Parameter Set 1', 
+        SupportsShouldProcess=$true, 
+        PositionalBinding=$false,
+        HelpUri = 'http://www.microsoft.com/',
+        ConfirmImpact='Medium')]
     [OutputType([String])]
-    Param
-    (
+    Param(
         # Param1 help description
         [Parameter(Mandatory=$true, 
-                   ValueFromPipeline=$true,
-                   ValueFromPipelineByPropertyName=$true, 
-                   ValueFromRemainingArguments=$false, 
-                   Position=0,
-                   ParameterSetName='Parameter Set 1')]
+            ValueFromPipeline=$true,
+            ValueFromPipelineByPropertyName=$true, 
+            ValueFromRemainingArguments=$false, 
+            Position=0,
+            ParameterSetName='Parameter Set 1')]
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
         [ValidateCount(0,5)]
-        [ValidateSet("sun", "moon", "earth")]
-        [Alias("p1")] 
+        [ValidateSet('sun', 'moon', 'earth')]
         $Param1,
 
         # Param2 help description
@@ -61,35 +55,35 @@ function Verb-Noun
         [String]$Param3,
 
         [Parameter(Mandatory=$true, 
-                   HelpMessage='On or off')]   # interactive helpmessage: use !? if this is a required parameter
+            HelpMessage='On or off')]   # interactive helpmessage: use !? if this is a required parameter
         [string]$Param4,
 
         [switch]$Param5
     )
 
-    Begin
-    {
+    Begin {
+        Write-Verbose 'something'
     }
  
-    Process
-    {
-        Write-Verbose 'something'
+    Process {
 
-        if ($pscmdlet.ShouldProcess("Target", "Operation"))
-        {
-            # do something
+        foreach($Computer in $ComputerName) {
 
-            $properties = [ordered]@{
-                         'Version' = 2;
-                         'Model'   = 'x'
-                         }
+            if ($pscmdlet.ShouldProcess("Target", "Operation")) {
+                # do something
 
-            $output = New-Object -TypeName PSObject -Property $properties
-            Write-Output $output
+                $properties = [ordered]@{
+                'Version' = 2;
+                'Model'   = 'X'
+                }
+
+                $output = New-Object -TypeName PSObject -Property $properties
+                Write-Output $output
+            }
         }
     }
  
-    End
-    {
+    End {
+        Write-Verbose 'something'
     }
 }
