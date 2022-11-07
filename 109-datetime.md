@@ -23,10 +23,11 @@
 # Task 2: Formatting dates
 In this task we're going to work with different ways to format date output. Since many regions in the world use different date formats, it's recommended to use a standard date format. The ISO 8601 standard is a nice one, because dates and times are arranged so the largest item (the year) is placed to the left and each successively smaller item is placed to the right of the previous item.
 1. Use a format string to display date and time. This command runs on all versions of PowerShell: ```"{0:yyyy}-{0:MM}-{0:dd}T{0:HH}:{0:mm}:{0:ss}" -f (Get-Date)```
-1. Use the format parameter of Get-Date: ```Get-Date -Format s```
+2. Another way to do that would be like this: ```"{0:yyyy-MM-dd-HH-mm-ss}" -f (Get-Date)```
+3. Or use the format parameter of Get-Date: ```Get-Date -Format s```
 
 ![ISO 8601 from XKCD.com](https://imgs.xkcd.com/comics/iso_8601.png)
-
+4. And use a common way to use in filenames: ```"{0:yyyyMMddTHHmmss}" -f (Get-Date)```
 
 ## Task 3: working with timespans
 1. Run this command to inspect the contents of the $now variable: ```$now```
