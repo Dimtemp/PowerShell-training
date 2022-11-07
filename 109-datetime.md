@@ -25,9 +25,8 @@ In this task we're going to work with different ways to format date output. Sinc
 1. Use a format string to display date and time. This command runs on all versions of PowerShell: ```"{0:yyyy}-{0:MM}-{0:dd}T{0:HH}:{0:mm}:{0:ss}" -f (Get-Date)```
 2. Another way to do that would be like this: ```"{0:yyyy-MM-dd-HH-mm-ss}" -f (Get-Date)```
 3. Or use the format parameter of Get-Date: ```Get-Date -Format s```
-
+4. And a common way to use in filenames: ```"{0:yyyyMMddTHHmmss}" -f (Get-Date)```
 ![ISO 8601 from XKCD.com](https://imgs.xkcd.com/comics/iso_8601.png)
-4. And use a common way to use in filenames: ```"{0:yyyyMMddTHHmmss}" -f (Get-Date)```
 
 ## Task 3: working with timespans
 1. Run this command to inspect the contents of the $now variable: ```$now```
