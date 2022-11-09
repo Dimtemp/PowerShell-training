@@ -26,6 +26,8 @@ In this task we're going to work with different ways to format date output. Sinc
 2. Another way to do that would be like this: ```"{0:yyyy-MM-dd-HH-mm-ss}" -f (Get-Date)```
 3. Or use the format parameter of Get-Date: ```Get-Date -Format s```
 4. And a common way to use in filenames: ```"{0:yyyyMMddTHHmmss}" -f (Get-Date)```
+5. or ```"{0}" -f (Get-Date -f yyyyMMddTHHmmss)```
+
 ![ISO 8601 from XKCD.com](https://imgs.xkcd.com/comics/iso_8601.png)
 
 ## Task 3: working with timespans
