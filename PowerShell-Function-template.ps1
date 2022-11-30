@@ -69,7 +69,7 @@ function Verb-Noun {
 
         foreach($Computer in $ComputerName) {
 
-            if ($pscmdlet.ShouldProcess("Target", "Operation")) {
+            if ($PSCmdlet.ShouldProcess("Target", "Operation")) {
                 # do something
 
                 $properties = [ordered]@{
