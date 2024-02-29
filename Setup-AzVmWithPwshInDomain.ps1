@@ -59,7 +59,15 @@ resourceGroupName =  'tst-eu-training-01' # 'pwsn-weu'
 New-AzResourceGroup -Name $resourceGroupName -Location $location
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quick-start-templates/master/101-sql-logical-server/azuredeploy.json" -administratorLogin $adminUser -administratorLoginPassword $adminPassword
 
-DC:
+For Azure VM:
+password between 8-123 characters long and 
+3 of complexity requirements:
+1) Contains an uppercase character 
+2) Contains a lowercase character 
+3) Contains a numeric digit 
+4) Contains a special character
+
+Create DC:
 https://github.com/Azure/azure-quickstart-templates/tree/master/application-workloads/active-directory/active-directory-new-domain
 or optionally: 
 https://github.com/Azure/azure-quickstart-templates/tree/master/application-workloads/active-directory/create-ad-forest-with-subdomain
