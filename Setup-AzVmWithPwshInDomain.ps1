@@ -53,6 +53,9 @@ function New-AzVMForPowerShellTraining {
 <#
 Make sure DC exists in powershell.lan domain
 JSON template deploy: https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azdeployment?view=azps-4.8.0
+$location = 'west europe'
+resourceGroupName =  'tst-eu-training-01' # 'pwsn-weu'
+
 New-AzResourceGroup -Name $resourceGroupName -Location $location
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quick-start-templates/master/101-sql-logical-server/azuredeploy.json" -administratorLogin $adminUser -administratorLoginPassword $adminPassword
 
@@ -68,14 +71,14 @@ Max 10 IPs per subscription per region!
 #>
 
 # Create VMs
-1..6 | % { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_ -Verbose -ResourceGroupName 'pwsh-neu' }
+1..6 | ForEach-Object { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_ -Verbose -ResourceGroupName $resourceGroupName }
 
 # join to domain  (this works on running VM)
-1..6 | % { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName 'pwsh' -VMName "pwshvm$_" }
+1..6 | ForEach-Object { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName $resourceGroupName -VMName "pwshvm$_" }
 # or New-AzureServiceADDomainExtensionConfig
 # or Add-Computer 'PowerShell.lan' -Restart -Credential (Get-Credential -UserName 'powershell\dimitri' -Message 'domain admin')
 
 
 
 # retrieve public IPs and FQDN
-Get-AzPublicIpAddress | select resourcegroupname, name, location, ProvisioningState, PublicIpAllocationMethod, IpAddress, @{n='Fqdn'; e={$_.DnsSettings.Fqdn}} | ft -a
+Get-AzPublicIpAddress | Select-Object resourcegroupname, name, location, ProvisioningState, PublicIpAllocationMethod, IpAddress, @{n='Fqdn'; e={$_.DnsSettings.Fqdn}} | Format-Table -AutoSize
