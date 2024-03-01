@@ -12,6 +12,8 @@ function New-AzVMForPowerShellTraining {
 
         [string]$UserName = 'Student',
         [string]$Password = 'Pa55w.rd1234',
+
+        [string]$Image = 'Win2019Datacenter', # or Win2022AzureEditionCore Win2016Datacenter (default), Win2012R2Datacenter, UbuntuLTS, Debian, ...
         
         [switch]$AsJob
     )
@@ -34,20 +36,25 @@ function New-AzVMForPowerShellTraining {
         DataDiskSizeInGb = 2
         VirtualNetworkName = $vnet.name
         SubnetName = $subnet.name
+        PublicIpSku = 'Standard'
         OpenPorts = 3389
         DomainNameLabel = $VMName   #  ???.westeurope.cloudapp.azure.com
         Credential  = $Cred
-        AsJob = $true
+        # AsJob = $AsJob
+        Image = $Image
+        # SecurityType = 'Standard'   # or TrustedLaunch, ConfidentialVM
         #Location by default same as vnet
         #Size = Standard_DS1_v2 (1 vcpus, 3.5 GiB memory) Get-AzVMSize -location westeurope | where numberofcores -lt 2 | sort MemoryInMB
-        #Image Win2016Datacenter (default), Win2012R2Datacenter, UbuntuLTS, Debian, ...
         #Priority = 'Spot' # spot instance
         #EvictionPolicy = 'Deallocate' # (or 'Delete')
     }
 
-    Write-Verbose $AzVMArguments
+    Write-Verbose ($AzVMArguments | Out-String)
 
     New-AzVM @AzVMArguments
+
+    # this command works:
+    # New-AzVM -Name testvm -ResourceGroupName $resourceGroupName -DataDiskSizeInGb 2 -VirtualNetworkName $vnet.name -SubnetName adSubnet -PublicIpSku 'Standard' -OpenPorts 3389 -DomainNameLabel testvm -Credential $Cred -OpenPorts 3389 -Image Win2019Datacenter
 }
 
 <#
@@ -79,10 +86,10 @@ Max 10 IPs per subscription per region!
 #>
 
 # Create VMs
-1..6 | ForEach-Object { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_ -Verbose -ResourceGroupName $resourceGroupName }
+1..9 | ForEach-Object { New-AzVMForPowerShellTraining -DomainNameLabel 'powershell.lan' -VMName pwshvm$_ -Verbose -ResourceGroupName $resourceGroupName }
 
 # join to domain  (this works on running VM)
-1..6 | ForEach-Object { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName $resourceGroupName -VMName "pwshvm$_" }
+1..9 | ForEach-Object { Set-AzVMADDomainExtension -DomainName 'powershell.lan' -Restart -ResourceGroupName $resourceGroupName -VMName "pwshvm$_" }
 # or New-AzureServiceADDomainExtensionConfig
 # or Add-Computer 'PowerShell.lan' -Restart -Credential (Get-Credential -UserName 'powershell\dimitri' -Message 'domain admin')
 
