@@ -20,7 +20,7 @@ In this chapter we're going to investigate objects and their output. The Get-Mem
 1. Notice it displays only three properties: Status, Name, and DisplayName.
 1. Run this command to inspect service objects: ```Get-Service | Get-Member```
 1. Notice there are several hidden properties that are very interesting, like RequiredServices and StartType.
-1. Run this command to display all services with their StartType: ```Get-Service | Select-Object Status, StartType, DisplayName
+1. Run this command to display all services with their StartType: ```Get-Service | Select-Object Status, StartType, DisplayName```
 1. Sort the output on StartType: ```Get-Service | Select-Object Status, StartType, DisplayName | Sort-Object StartType```
 1. Notice the **Disabled** services on the bottom: their **Status** should show **Stopped**.
 1. Also notice that most services that are set to **Automatic** should be running. Some might not. And notice that many services that are set to **Manual** are not running, but some might be running. This is expected behavior.
