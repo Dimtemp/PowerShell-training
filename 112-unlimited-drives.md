@@ -3,7 +3,7 @@ In this chapter we're going to work with the filesystem and other 'providers'. M
 
 It's assumed you have performed the datetime exercise before beginning with this module.
 
-## Task: PowerShell drives
+## Task 1: PowerShell drives
 PowerShell has mapped many databases and repositories (also called providers) to drives. This helps us in navigating and manipulating these providers with a uniform toolset.
 1. Run this command: ```Get-PSDrive```
 1. Notice the listing of drives. You might organize them in three categories:
@@ -13,7 +13,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Let's experiment with these drive in the next tasks.
 
 
-## Task: basic file processing
+## Task 2: basic file processing
 1. Open a new PowerShell console.
 1. Run this command (notice the backslash at the end): ```Get-ChildItem \```
 1. This results in a directory listing at the root of te drive.
@@ -36,7 +36,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. ```Remove-Item Folder3```
 
 
-## Task: creating drive mappings
+## Task 3: creating drive mappings
 1. Run this command to create a drivemapping to the domain controller:
 1. ```New-PSDrive –Name S –Root '\\LON-DC1\SYSVOL' –PSProvider FileSystem```
 1. Note: in MS-DOS and later Operating Sysyems, we would have run ```Net USE S: \\LON-DC1\SYSVOL```
@@ -51,7 +51,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Verify the drive mapping in Windows Explorer.
 
 
-## Task: certificate store
+## Task 4: certificate store
 #### Note: this only works on Windows.
 1. Run this command: ```Get-ChildItem Cert:\```
 1. This displays to locations: CurrentUser and LocalMachine.
@@ -64,7 +64,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. This final command displays extra properties, like an expiration date (NotAfter).
 
 
-## Task: Registry
+## Task 5: Registry
 #### Note: this only works on Windows.
 1. Run this command to inspect the registry: ```Get-ChildItem HKCU:```
 1. Run this command: ```regedit```
@@ -80,7 +80,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Inspect the new items with regedit.
 
 
-## Task: environment variables
+## Task 6: environment variables
 #### Note: this only works on Windows.
 1. Run this command to display all environment variables: ```Get-ChildItem Env:```
 1. Inspect a single environment variable: ```$Env:Path```
@@ -91,14 +91,14 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Since the path is a string (expected), we can use a method to make it more readable:  ```$Env:Path.Split(';')```
 
 
-## Task: aliases
+## Task 7: aliases
 1. Run this command (notice the trailing colon ':'): ```Get-ChildItem Alias:```
 1. This command displays all aliases.
 1. Run this command: ```Get-Alias```
 1. This displaus the same alias listing. There is no difference.
 
 
-## Task: variables
+## Task 8: variables
 1. Run this command (notice the trailing colon ':'): ```Get-ChildItem Variable:```
 1. Most variables are system variables, because we haven't created many variables yet.
 1. Run this command to create a variable: ```$x = 15```
@@ -108,7 +108,7 @@ PowerShell has mapped many databases and repositories (also called providers) to
 1. Inspect with: ```$y```
 
 
-## Task: functions
+## Task 9: functions
 1. Run this command (and notice the final colon ':'): ```Get-ChildItem Function:```
 1. There are a few functions that are special:
 1. - help: which in it's turn, calls Get-Help.
