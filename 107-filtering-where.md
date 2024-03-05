@@ -58,7 +58,7 @@ The Where-Object has a major advantage: all PowerShell output can be filtered. I
 1. Run this WMI command: ```Get-WmiObject -Class win32_service -Filter "Name='spooler'"```
 1. Notice the exact use of the quotes, the previous command includes four quotes in total: two double quotes and two single quotes.
 1. Some command's can generate a lot of load. To make the scripter aware of the impact his command can have some commands require a filter.
-1. For best results, run this command from a computer that has ADDS tooling installed. Optionally run this command from a server in a test environment to install the ADDS tooling: ```Install-WindowsFeature```
+1. For best results, run this command from a computer that has ADDS tooling installed. Optionally run this command from a server in a test environment to install the ADDS tooling: ```Install-WindowsFeature RSAT-AD-PowerShell```
 1. Run this command: ```Get-ADComputer```
 1. The command will ask for a filter if not provided. Type * at the prompt and press Enter.
 1. Run this command: ```Get-ADComputer -Filter *```
