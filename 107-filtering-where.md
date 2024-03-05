@@ -55,7 +55,7 @@ The Where-Object has a major advantage: all PowerShell output can be filtered. I
 1. This command filters all processes with **sys** in it's name. This filter is executed at the source.
 1. Run this command: ```Get-ChildItem -Path C:\Windows -Filter *.exe```
 1. You might get no results, depending on your PC. The command should filter only files with an .EXE extension.
-1. Run this WMI command: ```Get-WmiObject -Class win32_service -Filter "Name='spooler'"```
+1. Run this WMI command: ```Get-CimInstance -Class win32_service -Filter "Name='spooler'"```
 1. Notice the exact use of the quotes, the previous command includes four quotes in total: two double quotes and two single quotes.
 1. Some command's can generate a lot of load. To make the scripter aware of the impact his command can have some commands require a filter.
 1. For best results, run this command from a computer that has ADDS tooling installed. Optionally run this command from a server in a test environment to install the ADDS tooling: ```Install-WindowsFeature RSAT-AD-PowerShell```
