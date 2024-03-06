@@ -1,9 +1,10 @@
 # Divide and conquer with functions and modules
-In this chapter we're going to create a PowerShell module.
+In this chapter we're going to create a PowerShell module. This will be your toolbelt for your new PowerShell carreer.
+
 #### Note: you can find the finished module at the end of this exercise. If things don't work out as you wanted to, you can take a look over there.
 
 ## Task 1: Your first Function
-1. Start a Windows PowerShell console. Please note: for this exercise to work properly, you need to run Windows PowerShell (mostly a blue window, running PowerShell 5), not Microsoft PowerShell (mostly a black window, running PowerShell 7).
+1. Start a Windows PowerShell console. Please note: for this exercise to work properly, you need to run Windows PowerShell (most of the time a blue window, running PowerShell 5), not Microsoft PowerShell (most of the time a black window, running PowerShell 7).
 1. Run this command to get an overview of commands in Powershell: ```Get-Command | Group-Object CommandType```
 1. Notice there are a lot of cmdlets and a lot of functions. Cmdlets are PowerShell commands that are written in C#, which is beyond the scope of this exercise.
 1. Many commands are functions. Earlier, we created a function that replaced the prompt.
@@ -40,6 +41,7 @@ Modules are primarily stored in folders that are part of a search path. This way
 1. - C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 1. Microsoft uses the last folder to store their modules, so this is a no-go for us.
 1. You must decide whether to store your module in your Documents folder, or in the Program Files folder. A best practice would be to first store the module in your Documents folder, and then deploy it to other machines' Program Files folder.
+1. **Notice: if your documents folder is redirected, this is displayed in the output of the last command. If so, you should adapt the following path names to your situation.** For example, if you're using OneDrive, you documents folder might be Documents\OneDrive.
 1. Create a WindowsPowerShell folder in your documents folder:
 1. ```mkdir -Path $home\Documents\WindowsPowerShell```
 1. Create a modules folder in your WindowsPowerShell folder:
