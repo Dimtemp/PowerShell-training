@@ -67,7 +67,7 @@ Modules are primarily stored in folders that are part of a search path. This way
 1. Create a new function below line 1:
 ```
 Function Get-DiskSpace {
-  Get-WmiObject win32_logicaldisk | Where-Object DriveType -eq 3
+  Get-CimInstance win32_logicaldisk | Where-Object DriveType -eq 3
 }
 ```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
@@ -80,17 +80,17 @@ Function Get-DiskSpace {
 
 
 ## Task 5: Adapt the function to work with remote computers
-1. This script doesn't run on remote computers. This is easily fixed, since WMI is a protocol meant to manage large networks.
-1. Create a new line between the Function line and the Get-WmiObject line.
+1. This script doesn't run on remote computers. This is easily fixed, since CIM is a protocol meant to manage large networks.
+1. Create a new line between the Function line and the Get-CimInstance line.
 1. Write this on that empty line: ```param($ComputerName)```
 1. Modify the next line so it's like this:
-1. ```Get-WmiObject win32_logicaldisk -ComputerName $ComputerName | Where-Object DriveType -eq 3```
+1. ```Get-CimInstance win32_logicaldisk -ComputerName $ComputerName | Where-Object DriveType -eq 3```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
 1. Unload the module from memory using this command: ```Remove-Module MyFirstModule```
 1. Now run the new function: ```Get-DiskSpace -ComputerName LON-DC1```
 1. If everything is correct, the function retrieves disk info from LON-DC1.
 1. Run the function without a computername: ```Get-DiskSpace```
-1. You receive an error message. This is because we specified no computername. The WmiObject command cannot work with an empty computername. Let's fix this.
+1. You receive an error message. This is because we specified no computername. The CimInstance command cannot work with an empty computername. Let's fix this.
 
 
 ## Task 6: Adapt the function to work with local and remote computers
@@ -104,10 +104,10 @@ Function Get-DiskSpace {
 
 ## Task 7: Adapt the function to be able to process multiple computers
 1. Return to the ISE and change the param line so it looks like this: ```param([string[]]$ComputerName=$env:COMPUTERNAME)```
-1. Change the Get-WmiObject line so it's like this:
+1. Change the Get-CimInstance line so it's like this:
 ```
 foreach($pc in $computerName) {
-  Get-WmiObject win32_logicaldisk -ComputerName $pc | Where-Object DriveType -eq 3
+  Get-CimInstance win32_logicaldisk -ComputerName $pc | Where-Object DriveType -eq 3
 }
 ```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
@@ -125,7 +125,7 @@ foreach($pc in $computerName) {
 This command displays disk space on local and remote computers.
 
 .DESCRIPTION
-This command uses WMI to list disk size and capacity on local and remote computers.
+This command uses CIM to list disk size and capacity on local and remote computers.
 
 .EXAMPLE
 Get-DiskSpace -ComputerName LON-DC1
@@ -141,7 +141,7 @@ This command retrieves disk info from the LON-DC1 computer.
 ## Task 9: Adapt the function to include verbose output using CmdletBinding
 1. Return to the ISE and change the param line so it looks like this:
 1. ```[cmdletbinding()]param([string[]]$ComputerName=$env:COMPUTERNAME)```
-1. Insert a new line between foreach and Get-WmiObject and insert this line: ```Write-Verbose "Connecting to $pc"```
+1. Insert a new line between foreach and Get-CimInstance and insert this line: ```Write-Verbose "Connecting to $pc"```
 1. Save the file, and minimize the ISE to return to the PowerShell console.
 1. Unload the module from memory using this command: ```Remove-Module MyFirstModule```
 1. Run the function verbose: ```Get-DiskSpace -Verbose```
@@ -160,19 +160,19 @@ Function Get-DiskSpace {
     This command displays disk space on local and remote computers.
 
     .DESCRIPTION
-    This command uses WMI to list disk size and capacity on local and remote computers.
+    This command uses CIM to list disk size and capacity on local and remote computers.
 
     .EXAMPLE
     Get-DiskSpace -ComputerName LON-DC1
     This command retrieves disk info from the LON-DC1 computer.
     #>
 
-    [cmdletbinding()]param($ComputerName=$env:COMPUTERNAME)
+    [CmdletBinding()]
+    param($ComputerName=$env:COMPUTERNAME)
 
     foreach($pc in $ComputerName) {
         Write-Verbose "Connecting to $pc"
-        Get-WmiObject win32_logicaldisk -ComputerName $pc | Where-Object DriveType -eq 3
+        Get-CimInstance win32_logicaldisk -ComputerName $pc | Where-Object DriveType -eq 3
     }
 }
-
 ```
