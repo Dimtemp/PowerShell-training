@@ -1,9 +1,9 @@
 # Divide and conquer with functions and modules
-
+In this chapter we're going to create a PowerShell module.
 #### Note: you can find the finished module at the end of this exercise. If things don't work out as you wanted to, you can take a look over there.
 
 ## Task 1: Your first Function
-In this chapter we're going to create a PowerShell module.
+1. Start a Windows PowerShell console. Please note: for this exercise to work properly, you need to run Windows PowerShell (mostly a blue window, running PowerShell 5), not Microsoft PowerShell (mostly a black window, running PowerShell 7).
 1. Run this command to get an overview of commands in Powershell: ```Get-Command | Group-Object CommandType```
 1. Notice there are a lot of cmdlets and a lot of functions. Cmdlets are PowerShell commands that are written in C#, which is beyond the scope of this exercise.
 1. Many commands are functions. Earlier, we created a function that replaced the prompt.
