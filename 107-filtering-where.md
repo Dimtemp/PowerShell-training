@@ -5,6 +5,7 @@ Note: as with most PowerShell exercises, it's best not to copy-paste the command
 
 ## Task 1: basic filtering
 1. Run this command: ```Get-Help operators```
+1. If this command does not produce helpfull output, try running this command to update the help files: ```Update-Help```.
 1. PowerShell has several helpfiles covering the use of operators.
 1. Run this command: ```Get-Help about_Operators```
 1. This is a help article about operators in general.
