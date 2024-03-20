@@ -52,3 +52,8 @@
 1. Compare the two variables: ```Compare-Object $svcA $svcB -Property Name, Status```
 1. This procedure is a lot shorter than the procedure in the previous task. We only need to store the XML file once, to perform comparisons on the current state.
 1. Note: we need to have some method to store a result for future reference. In this example, we used an XML file. You can use another file format, or just use variables in memory to compare two different states. You're not required to store any state in an XML file specifically.
+
+## Task 4: building a process monitor
+1. Run this command to store the current process listing in memory: ```$p = Get-Process```
+2. Now start any new process. For example: start Microsoft Paint, or start the calculator.
+3. Run this command to perform a comparison of the current process listing with the stored process listing in memory: ```Compare-Object $p (get-process) -Property Name```
