@@ -58,7 +58,10 @@ The Where-Object has a major advantage: all PowerShell output can be filtered. I
 1. You might get no results, depending on your PC. The command should filter only files with an .EXE extension.
 1. Run this WMI command: ```Get-CimInstance -Class win32_service -Filter "Name='spooler'"```
 1. Notice the exact use of the quotes, the previous command includes four quotes in total: two double quotes and two single quotes.
-1. Some command's can generate a lot of load. To make the scripter aware of the impact his command can have some commands require a filter.
+
+
+## Optional Task 5: Active Directory filter
+1. Some command's can generate a lot of load. To make the scripter aware of the impact his command can have some commands require a filter. This task should be run on a Windows server that is member of an Active Directory domain. You can skip this task if you cannot log on to a domain-joined Windows server.
 1. For best results, run this command from a computer that has ADDS tooling installed. Optionally run this command from a server in a test environment to install the ADDS tooling: ```Install-WindowsFeature RSAT-AD-PowerShell```
 1. Run this command: ```Get-ADComputer```
 1. The command will ask for a filter if not provided. Type * at the prompt and press Enter.
