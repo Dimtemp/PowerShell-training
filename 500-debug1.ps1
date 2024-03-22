@@ -1,8 +1,7 @@
 function Get-ArchitectureInfo {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$True)]
-        [string[]]$ComputerName
+        [string[]]$ComputerName=$env:COMPUTERNAME
     )
     PROCESS {
         foreach ($computer in $computername) {
@@ -23,8 +22,8 @@ function Get-ArchitectureInfo {
 
 # expecting to see all computers listed in output
 # since they are 64-bit CPUs and 64-bit operating systems
-Get-ArchitectureInfo -ComputerName LON-SVR1,LON-DC1 |
-Where-Object { $_.ProcArchitecture -eq $_.OSArchitecture } |
-Select-Object -Property ComputerName
+
+Get-ArchitectureInfo -ComputerName LON-SVR1, LON-DC1 |
+Where-Object { $_.ProcArchitecture -eq $_.OSArchitecture }
 
 # But we get no output
