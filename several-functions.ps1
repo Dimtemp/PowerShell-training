@@ -27,6 +27,24 @@ function Invoke-Speak {
 
 
 
+function Get-Inventory {
+    # untested
+    $prefix = 'inventory'
+    
+    'OperatingSystem', 'QuickFixEngineering', 'Service', 'ScheduledJob', 'Process', 'Share', 'Volume' | 
+    Foreach-Object { Get-CimInstance win32_$_ | Export-Clixml "$prefix-$_.xml" }
+    
+    Get-ChildItem -Path ${env:ProgramFiles}, ${env:ProgramFiles(x86)} -Recurse | 
+    Export-Clixml "$prefix-programfiles.xml"
+    
+    Get-ScheduledTask | Export-Clixml "$prefix-ScheduledTasks.xml"
+    
+    Get-PsDrive | Export-Clixml "$prefix-PsDrive.xml"
+
+}
+
+
+
 function Show-SystemUsage {
     $os = Get-CimInstance Win32_OperatingSystem
     "{0:N2} GB Memory" -f ($os.TotalVisibleMemorySize/1MB)
