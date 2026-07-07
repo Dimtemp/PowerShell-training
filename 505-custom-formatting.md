@@ -1,16 +1,6 @@
 # Custom format demo
 
-```
-@{
-RootModule = 'CFDemo.psm1'
-ModuleVersion = '1.0'
-GUID = 'd17d4b9a-5d03-46de-a472-d7e02d637427'
-Author = 'Dimitri Koens'
-FormatsToProcess = @('.\CFDemoView.Format.ps1xml')
-FunctionsToExport = '*'
-}
-```
-
+Create a PowerShell module with the following function:
 ```
 function Get-ComputerInfo {
     $os = Get-CimInstance -ClassName Win32_OperatingSystem
@@ -43,9 +33,21 @@ function Get-ComputerInfo {
 }
 ```
 
-PS1XML file
-
+Create a module manifest file:
+```json
+@{
+RootModule = 'CFDemo.psm1'
+ModuleVersion = '1.0'
+GUID = 'd17d4b9a-5d03-46de-a472-d7e02d637427'
+Author = 'Dimitri Koens'
+FormatsToProcess = @('.\CFDemoView.Format.ps1xml')
+FunctionsToExport = '*'
+}
 ```
+
+Create a PS1XML file witht the following contents:
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Configuration>
   <ViewDefinitions>
