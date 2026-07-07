@@ -1,7 +1,51 @@
+# Custom format demo
 
+```
+@{
+RootModule = 'CFDemo.psm1'
+ModuleVersion = '1.0'
+GUID = 'd17d4b9a-5d03-46de-a472-d7e02d637427'
+Author = 'Dimitri Koens'
+FormatsToProcess = @('.\CFDemoView.Format.ps1xml')
+FunctionsToExport = '*'
+}
+```
 
+```
+function Get-ComputerInfo {
+    $os = Get-CimInstance -ClassName Win32_OperatingSystem
+    $sysdrive = $os.SystemDrive
+
+    $cs = Get-CimInstance Win32_ComputerSystem
+
+    $drive = Get-CimInstance Win32_LogicalDisk -Filter "DeviceId='$sysdrive'"
+
+    $proc = Get-CimInstance Win32_Processor |
+        Select-Object -First 1
+
+    $props = [ordered]@{
+        'ComputerName'=$cs.name
+        'Manufacturer'=$cs.manufacturer
+        'Model'=$cs.model
+        'Processors'=$cs.numberofprocessors
+        'Cores'=$cs.numberoflogicalprocessors
+        'RAM'=$cs.totalphysicalmemory
+        'Architecture'=$proc.addresswidth
+        'SysDriveFreeSpace'=$drive.freespace
+        'OSCaption'=$os.caption
+        'OSVersion'=$os.version
+        'SPVersion'=$os.servicepackmajorversion
+        'OSBuild'=$os.buildnumber
+    }
+    $obj = New-Object -TypeName PSObject -Property $props
+    $obj.psobject.typenames.insert(0, 'CFDemo.ComputerInfo')
+    Write-Output $obj
+}
+```
 
 PS1XML file
+
+```
 <?xml version="1.0" encoding="utf-8"?>
 <Configuration>
   <ViewDefinitions>
@@ -57,4 +101,4 @@ PS1XML file
 
   </ViewDefinitions>
 </Configuration>
-
+```
