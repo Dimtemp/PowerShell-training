@@ -1,7 +1,7 @@
 # Custom format demo
 
 Create a PowerShell module with the following function:
-```
+```powershell
 function Get-ComputerInfo {
     $os = Get-CimInstance -ClassName Win32_OperatingSystem
     $sysdrive = $os.SystemDrive
