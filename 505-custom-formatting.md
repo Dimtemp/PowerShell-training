@@ -1,6 +1,9 @@
 # Custom format demo
 
-Create a PowerShell module with the following function:
+In this section you're going to create a function with a custom formatting. 
+
+Let's start with creating a PowerShell module file with the following function:
+
 ```powershell
 function Get-ComputerInfo {
     $os = Get-CimInstance -ClassName Win32_OperatingSystem
@@ -28,12 +31,19 @@ function Get-ComputerInfo {
         'OSBuild'=$os.buildnumber
     }
     $obj = New-Object -TypeName PSObject -Property $props
-    $obj.psobject.typenames.insert(0, 'CFDemo.ComputerInfo')
+    # uncomment this later $obj.psobject.typenames.insert(0, 'CFDemo.ComputerInfo')
     Write-Output $obj
 }
 ```
 
-Create a module manifest file:
+1. Store it as CFDemo.psm1.
+2. Load the file using Import-Module.
+3. Run the function Get-ComputerInfo
+4. Notice the output as a list.
+5. Now format the output as a table using Get-ComputerInfo | Format-Table
+6. You can see the table is (probably) too wide for the screen, and information gets truncated.
+7. Now create a module manifest file with the following name: CFDemo.psd1
+
 ```json
 @{
 RootModule = 'CFDemo.psm1'
@@ -45,62 +55,83 @@ FunctionsToExport = '*'
 }
 ```
 
-Create a PS1XML file witht the following contents:
+1. Create a CFDemoView.Format.ps1xml file with the following contents:
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
-  <ViewDefinitions>
+    <ViewDefinitions>
 
-    <View>
-      <Name>DemoComputerTable</Name>
+        <View>
+            <Name>MachineInfo</Name>
+            <ViewSelectedBy>
+                <TypeName>CFDemo.ComputerInfo</TypeName>
+            </ViewSelectedBy>
 
-      <ViewSelectedBy>
-        <TypeName>Demo.Computer</TypeName>
-      </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
 
-      <TableControl>
+                    <TableColumnHeader>
+                        <Label>ComputerName</Label>
+                    </TableColumnHeader>
 
-        <TableHeaders>
-          <TableColumnHeader><Label>Name</Label></TableColumnHeader>
-          <TableColumnHeader><Label>Status</Label></TableColumnHeader>
-          <TableColumnHeader><Label>CPU</Label></TableColumnHeader>
-          <TableColumnHeader><Label>Memory</Label></TableColumnHeader>
-          <TableColumnHeader><Label>Uptime</Label></TableColumnHeader>
-        </TableHeaders>
+                    <TableColumnHeader>
+                        <Label>Model</Label>
+                    </TableColumnHeader>
 
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
+                    <TableColumnHeader>
+                        <Label>Cores</Label>
+                        <Alignment>Right</Alignment>
+                    </TableColumnHeader>
 
-              <TableColumnItem>
-                <PropertyName>Name</PropertyName>
-              </TableColumnItem>
+                    <TableColumnHeader>
+                        <Label>RAM(G)</Label>
+                        <Alignment>Right</Alignment>
+                    </TableColumnHeader>
 
-              <TableColumnItem>
-                <PropertyName>Status</PropertyName>
-              </TableColumnItem>
+                    <TableColumnHeader>
+                        <Label>OperatingSystem</Label>
+                    </TableColumnHeader>
 
-              <TableColumnItem>
-                <PropertyName>CPU</PropertyName>
-              </TableColumnItem>
+                </TableHeaders>
 
-              <TableColumnItem>
-                <PropertyName>Memory</PropertyName>
-              </TableColumnItem>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
 
-              <TableColumnItem>
-                <PropertyName>Uptime</PropertyName>
-              </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ComputerName</PropertyName>
+                            </TableColumnItem>
 
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
+                            <TableColumnItem>
+                                <PropertyName>Model</PropertyName>
+                            </TableColumnItem>
 
-      </TableControl>
+                            <TableColumnItem>
+                                <PropertyName>Cores</PropertyName>
+                            </TableColumnItem>
 
-    </View>
+                            <TableColumnItem>
+                                <ScriptBlock>'{0:N0} GB' -f ($_.RAM / 1GB)</ScriptBlock>
+                            </TableColumnItem>
 
-  </ViewDefinitions>
+                            <TableColumnItem>
+                                <PropertyName>OSCaption</PropertyName>
+                            </TableColumnItem>
+
+                        </TableColumnItems>
+                    </TableRowEntry>
+                 </TableRowEntries>
+            </TableControl>
+        </View>   
+
+    </ViewDefinitions>
 </Configuration>
+
 ```
+
+1. Finally, import the module again. Use the Force parameter to reload it from disk: Import-Module CFDemo.psd1
+2. Run the function Get-ComputerInfo
+3. Notice the table showing five columns. PowerShell shows a list, instead of a table, when more than four properties are part of the output, unless a format-file (ps1xml) is loaded.
+4. Run the function again, now using Get-Member to show other properties are available: Get-ComputerInfo | Get-Member
+5. Finally, run the function using all properties in the output: Get-ComputerInfo | Select-Object *
