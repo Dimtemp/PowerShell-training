@@ -5,7 +5,9 @@ In this section you're going to create a function with a custom formatting.
 Let's start with creating a PowerShell module file with the following function:
 
 ```powershell
-function Get-ComputerInfo {
+function Get-PcInfo {
+    # Get-ComputerInfo is already part of Windows PowerShell
+
     $os = Get-CimInstance -ClassName Win32_OperatingSystem
     $sysdrive = $os.SystemDrive
 
@@ -31,7 +33,7 @@ function Get-ComputerInfo {
         'OSBuild'=$os.buildnumber
     }
     $obj = New-Object -TypeName PSObject -Property $props
-    # uncomment this later $obj.psobject.typenames.insert(0, 'CFDemo.ComputerInfo')
+    # uncomment this later: $obj.psobject.typenames.insert(0, 'CFDemo.ComputerInfo')
     Write-Output $obj
 }
 ```
